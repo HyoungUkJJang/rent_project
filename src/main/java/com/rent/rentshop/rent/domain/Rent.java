@@ -40,6 +40,10 @@ public class Rent {
         this.rentStatus = rentStatus;
     }
 
+    public void rentComplete() {
+        this.rentStatus = RentStatus.RENTAL;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }

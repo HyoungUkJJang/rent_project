@@ -1,7 +1,6 @@
 package com.rent.rentshop.rent.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.rent.domain.Rent;
 
 import javax.persistence.EntityManager;

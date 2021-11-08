@@ -2,10 +2,7 @@ package com.rent.rentshop.controller;
 
 import com.rent.rentshop.common.ResponseData;
 import com.rent.rentshop.rent.domain.Rent;
-import com.rent.rentshop.rent.dto.MyProductReservationResponse;
-import com.rent.rentshop.rent.dto.MyRentResponse;
-import com.rent.rentshop.rent.dto.RentRequest;
-import com.rent.rentshop.rent.dto.RentResponse;
+import com.rent.rentshop.rent.dto.*;
 import com.rent.rentshop.rent.service.RentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -94,6 +91,30 @@ public class RentController {
                 .collect(Collectors.toList());
 
         return new ResponseData(result);
+    }
+
+    /**
+     * 상품의 주인이 대여 신청 접수를 완료합니다.
+     * @param userEmail 상품의 주인 아이디
+     * @param rentId 상품대여 정보의 아이디
+     * @return
+     */
+    @PostMapping("/reservation/{userEmail}/{rentId}")
+    public ResponseData rentReservationComplete(@PathVariable("userEmail") String userEmail, @PathVariable("rentId") Long rentId) {
+
+        Rent findRent = rentService.rentComplete(userEmail, rentId);
+        RentCompleteResponse result = RentCompleteResponse.builder()
+                .rentId(findRent.getId())
+                .productName(findRent.getProduct().getProductName())
+                .productPrice(findRent.getProduct().getProductPrice())
+                .deposit(findRent.getProduct().getDeposit())
+                .ownerUserMail(findRent.getProduct().getUser().getUserEmail())
+                .borrowUserEmail(findRent.getUser().getUserEmail())
+                .rentalDate(findRent.getRentalDate())
+                .returnDate(findRent.getReturnDate())
+                .build();
+        return new ResponseData(result);
+
     }
 
 }

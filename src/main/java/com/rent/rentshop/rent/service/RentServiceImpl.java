@@ -1,6 +1,7 @@
 package com.rent.rentshop.rent.service;
 
 import com.rent.rentshop.error.ProductNotFoundException;
+import com.rent.rentshop.error.RentNotFoundException;
 import com.rent.rentshop.error.UserNotFoundException;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.member.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -64,6 +66,15 @@ public class RentServiceImpl implements RentService{
         List<Rent> result = rentRepository.getMyProductRentalUserList(findUser.getId());
         return result;
 
+    }
+
+    @Override
+    @Transactional
+    public Rent rentComplete(String userId, Long rentId) {
+        Rent findRent = rentRepository.findById(rentId).orElseThrow(() -> new RentNotFoundException());
+        findRent.rentComplete();
+
+        return findRent;
     }
 
     @Override
