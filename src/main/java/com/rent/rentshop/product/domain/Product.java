@@ -2,9 +2,12 @@ package com.rent.rentshop.product.domain;
 
 import com.rent.rentshop.common.BaseTime;
 import com.rent.rentshop.member.domain.User;
+import com.rent.rentshop.rent.domain.Rent;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 상품의 메인 도메인
@@ -28,6 +31,9 @@ public class Product extends BaseTime {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "product")
+    List<Rent> rents = new ArrayList<>();
 
     @Builder
     public Product(Long id, String productName, String productDescription, int productPrice, int deposit, String productImg) {

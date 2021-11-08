@@ -56,6 +56,15 @@ public class RentServiceImpl implements RentService{
         return findMyRents;
     }
 
+    @Override
+    public List<Rent> getMyProductRentalUserList(String userEmail) {
+
+        User findUser = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
+
+        List<Rent> result = rentRepository.getMyProductRentalUserList(findUser.getId());
+        return result;
+
+    }
 
     @Override
     public List<Rent> findRents() {
