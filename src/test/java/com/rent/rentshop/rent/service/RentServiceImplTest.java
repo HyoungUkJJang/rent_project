@@ -25,6 +25,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -106,10 +107,7 @@ class RentServiceImplTest {
                 productRepository.findAll().clear();
                 invalidProductId = 9999L;
 
-                rentRequest = RentRequest.builder()
-                        .rentalDate(LocalDateTime.now())
-                        .returnDate(LocalDateTime.of(2021, 11, 5, 17, 0))
-                        .build();
+                rentRequest = createRentRequest();
             }
 
             @Test
@@ -153,6 +151,125 @@ class RentServiceImplTest {
             }
 
         }
+    }
+
+    @Nested
+    @DisplayName("findMyRent 메소드는")
+    class Describe_findMyRent{
+
+        @Nested
+        @DisplayName("사용자가 대여신청한 상품들이 있을 경우에")
+        class Context_exist_RentProduct {
+
+            String rentalUserEmail;
+            Long productId;
+            RentRequest rentRequest;
+
+            @BeforeEach
+            void prepare() {
+                User joinUser = userService.join(createUser());
+                User rentalUser = userService.join(createRentalUser());
+                rentalUserEmail = rentalUser.getUserEmail();
+
+                Product registerProduct = productService.register(createProduct(), joinUser.getUserEmail());
+                productId = registerProduct.getId();
+
+                rentRequest = createRentRequest();
+
+                rentService.createRent(rentalUserEmail, productId, rentRequest);
+            }
+
+            @Test
+            @DisplayName("대여 신청한 상품들을 조회하여 리턴합니다.")
+            void It_return_rentProductList() {
+
+                List<Rent> result = rentService.findMyRent(rentalUserEmail);
+                assertThat(result).hasSize(1);
+
+            }
+
+        }
+
+
+    }
+
+    @Nested
+    @DisplayName("getMyProductRentalUserList 메소드는")
+    class Describe_getMyProductRentalUserList {
+
+        @Nested
+        @DisplayName("내가 올린 상품에 대여를 신청한 사용자가 있다면")
+        class Context_exist_myProduct_rentApply {
+
+            String myEmail;
+
+            @BeforeEach
+            void prepare() {
+                User joinUser = userService.join(createUser());
+                User rentalUser = userService.join(createRentalUser());
+                myEmail = joinUser.getUserEmail();
+
+                Product registerProduct = productService.register(createProduct(), joinUser.getUserEmail());
+                RentRequest rentRequest = createRentRequest();
+
+                rentService.createRent(rentalUser.getUserEmail(), registerProduct.getId(), rentRequest);
+
+            }
+
+            @Test
+            @DisplayName("상품대여 정보와 대여자 정보를 리턴합니다.")
+            void It_return_rent() {
+                List<Rent> result = rentService.getMyProductRentalUserList(myEmail);
+                assertThat(result).hasSize(1);
+                assertThat(result.get(0).getProduct().getUser().getUserEmail())
+                        .isEqualTo(myEmail);
+            }
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("rentComplete 메소드는")
+    class Describe_rentComplete {
+
+        @Nested
+        @DisplayName("내가 올린 상품에 대여신청을 승인할 경우")
+        class Context_rentProduct_apply {
+
+            Long rentId;
+            String myEmail;
+
+            @BeforeEach
+            void prepare() {
+                User joinUser = userService.join(createUser());
+                User rentalUser = userService.join(createRentalUser());
+                myEmail = joinUser.getUserEmail();
+
+                Product registerProduct = productService.register(createProduct(), joinUser.getUserEmail());
+                RentRequest rentRequest = createRentRequest();
+
+                Rent createRent = rentService.createRent(rentalUser.getUserEmail(), registerProduct.getId(), rentRequest);
+                rentId = createRent.getId();
+            }
+
+            @Test
+            @DisplayName("RentStatus 상태를 RENTAL로 변경한다.")
+            void It_update_rentStatus_RENTAL() {
+                User findUser = userService.getUser(myEmail);
+                Rent result = rentService.rentComplete(findUser.getUserEmail(), rentId);
+                assertThat(result.getRentStatus()).isEqualTo(RentStatus.RENTAL);
+            }
+
+        }
+
+    }
+
+    private RentRequest createRentRequest() {
+        return RentRequest.builder()
+                .rentalDate(LocalDateTime.now())
+                .returnDate(LocalDateTime.of(2021, 11, 5, 17, 0))
+                .build();
     }
 
     private User createUser() {

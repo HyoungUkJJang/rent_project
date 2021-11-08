@@ -11,18 +11,18 @@ public class MyRentResponse {
     private String productName;
     private int productPrice;
     private int deposit;
-    private String ownerUserMail;
+    private String ownerUserEmail;
     private LocalDateTime rentalDate;
     private LocalDateTime returnDate;
 
     MyRentResponse() {}
 
     @Builder
-    public MyRentResponse(String productName, int productPrice, int deposit, String ownerUserMail, LocalDateTime rentalDate, LocalDateTime returnDate) {
+    public MyRentResponse(String productName, int productPrice, int deposit, String ownerUserEmail, LocalDateTime rentalDate, LocalDateTime returnDate) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.deposit = deposit;
-        this.ownerUserMail = ownerUserMail;
+        this.ownerUserEmail = ownerUserEmail;
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
     }
