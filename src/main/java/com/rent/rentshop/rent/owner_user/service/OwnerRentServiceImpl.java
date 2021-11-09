@@ -41,4 +41,13 @@ public class OwnerRentServiceImpl implements OwnerRentService{
         return findRent;
     }
 
+    @Override
+    @Transactional
+    public Rent returnedComplete(Long rentId) {
+        Rent findRent = ownerRentRepository.findById(rentId).orElseThrow(() -> new RentNotFoundException());
+        findRent.returnComplete();
+
+        return findRent;
+    }
+
 }

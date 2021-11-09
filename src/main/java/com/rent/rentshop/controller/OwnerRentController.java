@@ -4,6 +4,7 @@ import com.rent.rentshop.common.ResponseData;
 import com.rent.rentshop.rent.domain.Rent;
 import com.rent.rentshop.rent.owner_user.dto.MyProductReservationResponse;
 import com.rent.rentshop.rent.owner_user.dto.RentCompleteResponse;
+import com.rent.rentshop.rent.owner_user.dto.ReturnCompleteResponse;
 import com.rent.rentshop.rent.owner_user.service.OwnerRentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -66,6 +67,18 @@ public class OwnerRentController {
                 .build();
         return new ResponseData(result);
 
+    }
+
+    @PostMapping("/returned/{rentId}")
+    public ResponseData rentReturnedComplete(@PathVariable("rentId") Long rentId) {
+        Rent findRent = ownerRentService.returnedComplete(rentId);
+        ReturnCompleteResponse result = ReturnCompleteResponse.builder()
+                .productName(findRent.getProduct().getProductName())
+                .borrowedUserEmail(findRent.getUser().getUserEmail())
+                .rentStatus(findRent.getRentStatus())
+                .build();
+
+        return new ResponseData(result);
     }
 
 }

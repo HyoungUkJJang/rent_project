@@ -12,4 +12,6 @@ public interface OwnerRentService {
     // 렌트신청 접수
     Rent rentComplete(String userId, Long rentId);
 
+    // 렌트 반납처리 완료
+    Rent returnedComplete(Long rentId);
 }

@@ -44,6 +44,10 @@ public class Rent {
         this.rentStatus = RentStatus.RENTAL;
     }
 
+    public void returnComplete() {
+        this.rentStatus = RentStatus.RETURN;
+    }
+
     public void rentReturnWait() {
         this.rentStatus = RentStatus.RETURN_WAIT;
     }
