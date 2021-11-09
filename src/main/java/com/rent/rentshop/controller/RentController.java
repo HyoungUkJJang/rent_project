@@ -71,6 +71,25 @@ public class RentController {
     }
 
     /**
+     * 내가 빌렸던 상품을 반납신청 처리를 합니다.
+     * @param productId 빌렸던 상품의 아이디
+     * @param userEmail 빌린 유저의 이메일
+     * @return 빌렸던 상품의 정보
+     */
+    @PostMapping("/myrental/returned/{productId}/{userEmail}")
+    public ResponseData returnedMyRental(@PathVariable("productId") Long productId, @PathVariable("userEmail") String userEmail) {
+
+        Rent returnedMyRental = rentService.returnedMyRental(productId, userEmail);
+        MyRentReturnResponse result = MyRentReturnResponse.builder()
+                .productName(returnedMyRental.getProduct().getProductName())
+                .ownerUserEmail(returnedMyRental.getUser().getUserEmail())
+                .rentStatus(returnedMyRental.getRentStatus())
+                .build();
+
+        return new ResponseData(result);
+    }
+
+    /**
      * 사용자가 자신이 올린 상품에 대여신청 현황을 조회하여 리턴합니다.
      * @param userEmail 사용자 아이디
      * @return 사용자가 올린 상품에 대하여 대여신청을 한 목록

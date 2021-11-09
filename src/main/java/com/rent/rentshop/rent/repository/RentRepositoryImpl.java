@@ -1,6 +1,7 @@
 package com.rent.rentshop.rent.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.rent.rentshop.rent.domain.QRent;
 import com.rent.rentshop.rent.domain.Rent;
 
 import javax.persistence.EntityManager;
@@ -29,6 +30,18 @@ public class RentRepositoryImpl implements RentRepositoryCustom {
                 .join(rent.product, product)
                 .where(user.id.eq(userId))
                 .fetch();
+        return result;
+    }
+
+    @Override
+    public Rent returnedMyRental(Long productId, Long userId) {
+        Rent result = queryFactory
+                .select(QRent.rent)
+                .from(QRent.rent)
+                .join(QRent.rent.user, user)
+                .join(QRent.rent.product, product)
+                .where(user.id.eq(userId).and(product.id.eq(productId)))
+                .fetchFirst();
         return result;
     }
 

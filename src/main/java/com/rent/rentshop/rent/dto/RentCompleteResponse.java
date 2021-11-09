@@ -5,6 +5,9 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+/**
+ * 상품대여가 완료되엇을때 내보내는 응답객체
+ */
 @Getter
 public class RentCompleteResponse {
 

@@ -17,6 +17,14 @@ public interface RentRepositoryCustom {
     List<Rent> getMyApplyRentList(Long userId);
 
     /**
+     * 사용자가 빌린 상품을 반납신청 합니다.
+     * @param productId 빌린 상품의 아이디
+     * @param userId 빌린 유저의 아이디
+     * @return 빌렸던 상품
+     */
+    Rent returnedMyRental(Long productId, Long userId);
+
+    /**
      * 사용자가 자신의 상품을 대여신청한 목록을 조회하여 리턴합니다.
      * @param userId 상품의 주인
      * @return 신청이 들어온 상품목록

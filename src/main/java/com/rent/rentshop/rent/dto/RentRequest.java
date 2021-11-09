@@ -6,6 +6,9 @@ import lombok.Getter;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
+/**
+ * 상품대여 신청 폼
+ */
 @Getter
 public class RentRequest {
 

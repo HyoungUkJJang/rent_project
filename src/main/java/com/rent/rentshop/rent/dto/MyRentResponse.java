@@ -5,6 +5,9 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+/**
+ * 내가 빌린 상품의 응답 객체
+ */
 @Getter
 public class MyRentResponse {
 
