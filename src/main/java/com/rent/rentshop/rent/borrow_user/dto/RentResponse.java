@@ -1,4 +1,4 @@
-package com.rent.rentshop.rent.dto;
+package com.rent.rentshop.rent.borrow_user.dto;
 
 import lombok.Builder;
 import lombok.Getter;

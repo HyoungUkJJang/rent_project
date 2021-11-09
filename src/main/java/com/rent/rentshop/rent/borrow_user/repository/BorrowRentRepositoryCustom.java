@@ -1,13 +1,10 @@
-package com.rent.rentshop.rent.repository;
+package com.rent.rentshop.rent.borrow_user.repository;
 
 import com.rent.rentshop.rent.domain.Rent;
 
 import java.util.List;
 
-/**
- * 상품대여와 관련된 QueryDsl 레포지토리
- */
-public interface RentRepositoryCustom {
+public interface BorrowRentRepositoryCustom {
 
     /**
      * 사용자가 신청한 대여상품 목록을 조회하여 리턴합니다.
@@ -23,12 +20,5 @@ public interface RentRepositoryCustom {
      * @return 빌렸던 상품
      */
     Rent returnedMyRental(Long productId, Long userId);
-
-    /**
-     * 사용자가 자신의 상품을 대여신청한 목록을 조회하여 리턴합니다.
-     * @param userId 상품의 주인
-     * @return 신청이 들어온 상품목록
-     */
-    List<Rent> getMyProductRentalUserList(Long userId);
 
 }

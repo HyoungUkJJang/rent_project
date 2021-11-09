@@ -1,29 +1,27 @@
-package com.rent.rentshop.rent.service;
+package com.rent.rentshop.rent.borrow_user.service;
 
 import com.rent.rentshop.error.ProductNotFoundException;
-import com.rent.rentshop.error.RentNotFoundException;
 import com.rent.rentshop.error.UserNotFoundException;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.member.repository.UserRepository;
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.repository.ProductRepository;
+import com.rent.rentshop.rent.borrow_user.repository.BorrowRentRepository;
 import com.rent.rentshop.rent.domain.Rent;
 import com.rent.rentshop.rent.domain.RentStatus;
-import com.rent.rentshop.rent.dto.RentRequest;
-import com.rent.rentshop.rent.repository.RentRepository;
+import com.rent.rentshop.rent.borrow_user.dto.RentRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class RentServiceImpl implements RentService{
+public class BorrowRentServiceImpl implements BorrowRentService {
 
-    private final RentRepository rentRepository;
+    private final BorrowRentRepository borrowRentRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
@@ -45,17 +43,8 @@ public class RentServiceImpl implements RentService{
         rent.setUser(findUser);
         rent.setProduct(findProduct);
 
-        return rentRepository.save(rent);
+        return borrowRentRepository.save(rent);
 
-    }
-
-    @Override
-    public List<Rent> findMyRent(String userEmail) {
-
-        User findUser = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
-
-        List<Rent> findMyRents = rentRepository.getMyApplyRentList(findUser.getId());
-        return findMyRents;
     }
 
     @Override
@@ -64,7 +53,7 @@ public class RentServiceImpl implements RentService{
 
         User findUser = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
 
-        Rent result = rentRepository.returnedMyRental(productId, findUser.getId());
+        Rent result = borrowRentRepository.returnedMyRental(productId, findUser.getId());
         result.rentReturnWait();
 
         return result;
@@ -72,26 +61,17 @@ public class RentServiceImpl implements RentService{
     }
 
     @Override
-    public List<Rent> getMyProductRentalUserList(String userEmail) {
+    public List<Rent> findMyRent(String userEmail) {
 
         User findUser = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
 
-        List<Rent> result = rentRepository.getMyProductRentalUserList(findUser.getId());
-        return result;
-
-    }
-
-    @Override
-    @Transactional
-    public Rent rentComplete(String userId, Long rentId) {
-        Rent findRent = rentRepository.findById(rentId).orElseThrow(() -> new RentNotFoundException());
-        findRent.rentComplete();
-
-        return findRent;
+        List<Rent> findMyRents = borrowRentRepository.getMyApplyRentList(findUser.getId());
+        return findMyRents;
     }
 
     @Override
     public List<Rent> findRents() {
-        return rentRepository.findAll();
+        return borrowRentRepository.findAll();
     }
+
 }

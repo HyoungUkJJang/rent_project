@@ -1,4 +1,4 @@
-package com.rent.rentshop.rent.dto;
+package com.rent.rentshop.rent.borrow_user.dto;
 
 import com.rent.rentshop.rent.domain.RentStatus;
 import lombok.Builder;
