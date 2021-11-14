@@ -16,6 +16,13 @@ public interface ProductService {
     List<Product> getProducts();
 
     /**
+     * 사용자가 등록한 상품만 조회해 상품목록을 리턴합니다.
+     * @param userEmail 사용자 이메일
+     * @return 조회된 상품목록
+     */
+    List<Product> getMyProducts(String userEmail);
+
+    /**
      * 상품을 상세조회하여 리턴합니다.
      * @param id 조회할 상품의 아이디
      * @return 조회된 상품

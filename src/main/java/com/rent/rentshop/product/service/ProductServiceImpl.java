@@ -28,10 +28,17 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    public List<Product> getMyProducts(String userEmail) {
+        User findUser = getFindUser(userEmail);
+        List<Product> result = productRepository.getMyProducts(findUser.getId());
+        return result;
+    }
+
+    @Override
     @Transactional
     public Product register(Product form, String userEmail) {
 
-        User findUser = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
+        User findUser = getFindUser(userEmail);
 
         form.setUser(findUser);
 
@@ -69,6 +76,15 @@ public class ProductServiceImpl implements ProductService{
     public void delete(Long id) {
         Product findProduct = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException());
         productRepository.delete(findProduct);
+    }
+
+    /**
+     * 사용자를 찾아 리턴합니다.
+     * @param userEmail 찾을 사용자 이메일
+     * @return
+     */
+    private User getFindUser(String userEmail) {
+        return userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
     }
 
 }

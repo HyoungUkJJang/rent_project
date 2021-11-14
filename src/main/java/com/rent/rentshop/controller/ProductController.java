@@ -43,6 +43,28 @@ public class ProductController {
     }
 
     /**
+     * 사용자가 자신이 올린 상품목록 조회 요청을 처리하여 200 상태코드를 반환합니다.
+     * @param userEmail 사용자 이메일
+     * @return
+     */
+    @GetMapping("/myproduct/{userEmail}")
+    public ResponseData getMyProductList(@PathVariable("userEmail") String userEmail) {
+
+        List<Product> myProducts = productService.getMyProducts(userEmail);
+        List<ProductSimpleResponse> result = myProducts.stream()
+                .map(r -> new ProductSimpleResponse(
+                        r.getId(),
+                        r.getProductName(),
+                        r.getProductPrice(),
+                        r.getDeposit()
+                ))
+                .collect(Collectors.toList());
+
+        return new ResponseData(result);
+
+    }
+
+    /**
      * 상품을 상세조회하여 상품 상세정보를 반환 후 200 상태코드를 반환합니다.
      * @param id 조회할 상품의 아이디
      * @return 상품 상세조회 응답 도메인

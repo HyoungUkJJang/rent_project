@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * 내가 빌린 상품의 응답 객체
+ * rentStatus 추가해야함
  */
 @Getter
 public class MyRentResponse {
