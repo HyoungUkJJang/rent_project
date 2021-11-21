@@ -7,6 +7,7 @@ import com.rent.rentshop.rent.borrow_user.dto.MyRentResponse;
 import com.rent.rentshop.rent.borrow_user.dto.MyRentReturnResponse;
 import com.rent.rentshop.rent.borrow_user.dto.RentRequest;
 import com.rent.rentshop.rent.borrow_user.dto.RentResponse;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
