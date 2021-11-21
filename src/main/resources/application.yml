@@ -1,13 +1,24 @@
+#spring:
+#  datasource:
+#    #url: jdbc:h2:~/rent/rentshop
+#    url : jdbc:h2:tcp://localhost/~/rentshop
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+
 spring:
   datasource:
-    #url: jdbc:h2:~/rent/rentshop
-    url : jdbc:h2:tcp://localhost/~/rentshop
-    username: sa
+    url : jdbc:mysql://localhost:3306/rentshop?serverTimezone=Asia/Seoul
+    username: root
     password:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
+
 jwt:
   secret: "1234567890123456789012345678901234567890"
 
