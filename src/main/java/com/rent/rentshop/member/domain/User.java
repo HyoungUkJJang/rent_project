@@ -45,9 +45,8 @@ public class User extends BaseTime {
         this.userAddress = userAddress;
     }
 
-    public void updateUser(String userEmail, String userPhone, String roadAddress, String detailAddress) {
+    public void updateUser(String userPhone, String roadAddress, String detailAddress) {
 
-        this.userEmail = userEmail;
         this.userPhone = userPhone;
         this.userAddress = new Address(roadAddress, detailAddress);
 

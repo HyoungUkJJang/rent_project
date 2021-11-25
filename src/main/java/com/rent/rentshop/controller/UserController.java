@@ -82,18 +82,18 @@ public class UserController {
 
     }
 
-    @RequestMapping(method = {RequestMethod.PATCH, RequestMethod.PUT}, value = "/{userId}")
-    public void updateUser(@PathVariable("userId") String userId,
+    @RequestMapping(method = {RequestMethod.PATCH, RequestMethod.PUT}, value = "/{userEmail}")
+    public void updateUser(@PathVariable("userEmail") String userEmail,
                            @RequestBody @Valid UserUpdate form) {
 
-        userService.userUpdate(userId, form);
+        userService.userUpdate(userEmail, form);
 
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{userEmail}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUser(@PathVariable String userId) {
-        userService.userDelete(userId);
+    public void deleteUser(@PathVariable String userEmail) {
+        userService.userDelete(userEmail);
     }
 
 }

@@ -49,8 +49,7 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByUserEmail(userEmail)
                 .orElseThrow(() -> new UserNotFoundException());
 
-        user.updateUser(form.getUserEmail(),
-                form.getUserPhone(), form.getRoadAddress(), form.getDetailAddress());
+        user.updateUser(form.getUserPhone(), form.getRoadAddress(), form.getDetailAddress());
         user.createPassword(form.getPassword(), passwordEncoder);
 
     }

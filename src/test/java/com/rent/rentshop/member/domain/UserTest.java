@@ -48,7 +48,7 @@ class UserTest {
         String updateUserPhone = "011";
         String updateRoadAddress = "updateRoad";
         String updateDetailAddress = "updateDetail";
-        user.updateUser(updateUserMail, updateUserPhone,
+        user.updateUser(updateUserPhone,
                 updateRoadAddress, updateDetailAddress);
 
         //WHEN
