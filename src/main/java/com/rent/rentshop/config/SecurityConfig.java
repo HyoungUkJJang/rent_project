@@ -30,9 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         Filter loginErrorFilter = new LoginErrorFilter();
 
-        http.csrf().disable()
-                .addFilter(loginFilter)
-                .addFilterBefore(loginErrorFilter, LoginFilter.class);
+        http.csrf().disable();
+//                .addFilter(loginFilter)
+//                .addFilterBefore(loginErrorFilter, LoginFilter.class);
 
     }
 

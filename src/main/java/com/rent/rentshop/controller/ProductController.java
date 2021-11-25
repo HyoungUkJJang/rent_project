@@ -91,9 +91,9 @@ public class ProductController {
      * @param form 상품 정보
      * @return 등록된 상품
      */
-    @PostMapping
+    @PostMapping("/{userEmail}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseData register(@RequestBody @Valid ProductRequest form, @RequestHeader(name = "userEmail")String userEmail) {
+    public ResponseData register(@RequestBody @Valid ProductRequest form, @PathVariable(name = "userEmail")String userEmail) {
 
         Product product = Product.builder()
                 .productName(form.getProductName())
