@@ -234,7 +234,6 @@ class UserServiceImplTest {
 
                 updateForm = UserUpdate.builder()
                         .password("update12345")
-                        .userEmail("update@mail")
                         .userPhone("011")
                         .roadAddress("999-999")
                         .detailAddress("updateAddress")
@@ -247,7 +246,6 @@ class UserServiceImplTest {
             void It_update_user() {
 
                 userService.userUpdate(userEmail, updateForm);
-                assertEquals(user.getUserEmail(), updateForm.getUserEmail());
 
             }
 

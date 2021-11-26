@@ -1,0 +1,11 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAWY67LMIGQQJ22Y6E
+      secretKey: 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
+    s3:
+      bucket: hyounguk-bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
