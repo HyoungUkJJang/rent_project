@@ -41,7 +41,8 @@ public class ProductController {
                         p.getId(),
                         p.getProductName(),
                         p.getProductPrice(),
-                        p.getDeposit())
+                        p.getDeposit(),
+                        p.getProductImages().get(0).getServerFileName())
                 ).collect(Collectors.toList());
 
         return new ResponseData(products);
@@ -62,7 +63,8 @@ public class ProductController {
                         r.getId(),
                         r.getProductName(),
                         r.getProductPrice(),
-                        r.getDeposit()
+                        r.getDeposit(),
+                        r.getProductImages().get(0).getServerFileName()
                 ))
                 .collect(Collectors.toList());
 
@@ -79,12 +81,16 @@ public class ProductController {
     public ResponseData getProduct(@PathVariable("id") Long id) {
 
         Product findProduct = productService.getProduct(id);
+
         ProductResponse productResponseDto = ProductResponse.builder()
                 .productId(findProduct.getId())
                 .productName(findProduct.getProductName())
                 .productPrice(findProduct.getProductPrice())
                 .deposit(findProduct.getDeposit())
                 .productDescription(findProduct.getProductDescription())
+                .productImages(
+                        imageResponsesConverter(findProduct.getProductImages())
+                )
                 .build();
 
         return new ResponseData(productResponseDto);
@@ -98,7 +104,7 @@ public class ProductController {
      */
     @PostMapping("/{userEmail}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@Valid ProductRequest form, @PathVariable(name = "userEmail")String userEmail) throws IOException {
+    public ResponseData register(@Valid ProductRequest form, @PathVariable(name = "userEmail")String userEmail) throws IOException {
 
         Product product = Product.builder()
                 .productName(form.getProductName())
@@ -106,10 +112,10 @@ public class ProductController {
                 .productPrice(form.getProductPrice())
                 .deposit(form.getDeposit())
                 .build();
-
         Product result = productService.register(product,userEmail);
 
-        productImageService.save(form.getProductImages(), result);
+        List<ProductImage> images = productImageService.save(form.getProductImages(), result);
+        List<ProductImageResponse> imageResult = imageResponsesConverter(images);
 
         ProductResponse responseProduct = ProductResponse.builder()
                 .productId(result.getId())
@@ -117,9 +123,10 @@ public class ProductController {
                 .productPrice(result.getProductPrice())
                 .deposit(result.getDeposit())
                 .productDescription(result.getProductDescription())
+                .productImages(imageResult)
                 .build();
 
-       // return new ResponseData(responseProduct);
+        return new ResponseData(responseProduct);
     }
 
     /**
@@ -146,29 +153,20 @@ public class ProductController {
 
     }
 
-}
 
-/*
+    /**
+     * 조회용 이미지 리스트로 변환합니다.
+     * @param productImages
+     * @return 조회용 이미지 리스트
+     */
+    private List<ProductImageResponse> imageResponsesConverter(List<ProductImage> productImages) {
 
-두 수를 먼저 입력 받고 그 두수의 합을 T번만큼 출력하고싶다. 숫자는 공백으로 구분한가
-15 20 30 > 이렇게 입력했을때
-35
+        List<ProductImageResponse> imageResult = productImages.stream().map(i -> new ProductImageResponse(
+                i.getOriginalFileName(),
+                i.getServerFileName()
+        )).collect(Collectors.toList());
 
-// N을 입력받아 N개의 수를 입력받고싶다.
-
-// N을 입력받아  두 수를 입력받아 합을 구하고싶다.
-5
-1 1
-2 5
-13 7
-20 10
-45 100
-
-
-int N = sc.nextInt();
-
-for(int i=0;i<N;i++) {
+        return imageResult;
+    }
 
 }
-
- */

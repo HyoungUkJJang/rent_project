@@ -22,15 +22,14 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     @Transactional
-    public void save(List<MultipartFile> multipartFiles, Product product) throws IOException {
-        for (MultipartFile multipartFile : multipartFiles) {
-            if (!multipartFile.isEmpty()) {
-                ProductImage productImage = productFileStore.storeFile(multipartFile);
-                productImage.setProduct(product);
-                productImageRepository.save(productImage);
-            }
-        }
+    public List<ProductImage> save(List<MultipartFile> multipartFiles, Product product) throws IOException {
 
+        List<ProductImage> productImages = productFileStore.storeFiles(multipartFiles);
+        for (ProductImage productImage : productImages) {
+            productImage.setProduct(product);
+            productImageRepository.save(productImage);
+        }
+        return productImages;
     }
 
 }

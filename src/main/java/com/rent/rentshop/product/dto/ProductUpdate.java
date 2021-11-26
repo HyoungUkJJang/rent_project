@@ -23,15 +23,13 @@ public class ProductUpdate {
     private int deposit;
 
     private String productDescription;
-    private String productImg;
 
     @Builder
-    public ProductUpdate(String productName, int productPrice, int deposit, String productDescription, String productImg) {
+    public ProductUpdate(String productName, int productPrice, int deposit, String productDescription) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.deposit = deposit;
         this.productDescription = productDescription;
-        this.productImg = productImg;
     }
 
 }

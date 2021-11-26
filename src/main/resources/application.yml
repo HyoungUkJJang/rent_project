@@ -7,7 +7,11 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: ture
+        default_batch_fetch_size: 100
 
 file:
   dir:

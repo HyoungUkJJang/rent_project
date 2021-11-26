@@ -53,6 +53,10 @@ public class Product extends BaseTime {
         this.deposit = deposit;
     }
 
+    public void setProductImages(List<ProductImage> productImages) {
+        this.productImages = productImages;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }

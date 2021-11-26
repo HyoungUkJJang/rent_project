@@ -16,13 +16,15 @@ public class ProductSimpleResponse {
     private String productName;
     private int productPrice;
     private int deposit;
+    private String thumbnailImage;
 
     @Builder
-    public ProductSimpleResponse(Long productId, String productName, int productPrice, int deposit) {
+    public ProductSimpleResponse(Long productId, String productName, int productPrice, int deposit, String thumbnailImage) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
         this.deposit = deposit;
+        this.thumbnailImage = thumbnailImage;
     }
 
 }
