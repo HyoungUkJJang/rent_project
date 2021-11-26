@@ -26,7 +26,9 @@ public class Product extends BaseTime {
     private String productDescription;
     private int productPrice;
     private int deposit;
-    private String productImg;
+
+    @OneToMany(mappedBy = "product")
+    List<ProductImage> productImages = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -36,21 +38,19 @@ public class Product extends BaseTime {
     List<Rent> rents = new ArrayList<>();
 
     @Builder
-    public Product(Long id, String productName, String productDescription, int productPrice, int deposit, String productImg) {
+    public Product(Long id, String productName, String productDescription, int productPrice, int deposit) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.deposit = deposit;
-        this.productImg = productImg;
     }
 
-    public void updateProduct(String productName, String productDescription, int productPrice, int deposit, String productImg) {
+    public void updateProduct(String productName, String productDescription, int productPrice, int deposit) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.deposit = deposit;
-        this.productImg = productImg;
     }
 
     public void setUser(User user) {

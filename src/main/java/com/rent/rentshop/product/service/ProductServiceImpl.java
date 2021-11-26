@@ -7,6 +7,7 @@ import com.rent.rentshop.member.repository.UserRepository;
 import com.rent.rentshop.member.service.UserService;
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.dto.ProductUpdate;
+import com.rent.rentshop.product.file.ProductFileStore;
 import com.rent.rentshop.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -66,8 +67,7 @@ public class ProductServiceImpl implements ProductService{
                 form.getProductName(),
                 form.getProductDescription(),
                 form.getProductPrice(),
-                form.getDeposit(),
-                form.getProductImg());
+                form.getDeposit());
 
     }
 

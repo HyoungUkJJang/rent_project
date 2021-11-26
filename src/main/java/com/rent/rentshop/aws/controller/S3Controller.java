@@ -13,11 +13,11 @@ import java.io.IOException;
 @RestController
 public class S3Controller {
 
-    private final S3Uploader s3Uploader;
-
-    @PostMapping("/images")
-    public String upload(@RequestParam("images") MultipartFile multipartFile) throws IOException {
-        s3Uploader.upload(multipartFile, "static");
-        return "test";
-    }
+//    private final S3Uploader s3Uploader;
+//
+//    @PostMapping("/images")
+//    public String upload(@RequestParam("images") MultipartFile multipartFile) throws IOException {
+//        s3Uploader.upload(multipartFile, "static");
+//        return "test";
+//    }
 }

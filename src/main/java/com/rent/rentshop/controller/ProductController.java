@@ -2,13 +2,18 @@ package com.rent.rentshop.controller;
 
 import com.rent.rentshop.common.ResponseData;
 import com.rent.rentshop.product.domain.Product;
+import com.rent.rentshop.product.domain.ProductImage;
 import com.rent.rentshop.product.dto.*;
+import com.rent.rentshop.product.file.ProductFileStore;
+import com.rent.rentshop.product.service.ProductImageService;
 import com.rent.rentshop.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +26,7 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProductImageService productImageService;
 
     /**
      * 상품 전체를 조회하여 상품목록을 반환 후 200 상태코드를 반환합니다.
@@ -79,7 +85,6 @@ public class ProductController {
                 .productPrice(findProduct.getProductPrice())
                 .deposit(findProduct.getDeposit())
                 .productDescription(findProduct.getProductDescription())
-                .productImg(findProduct.getProductImg())
                 .build();
 
         return new ResponseData(productResponseDto);
@@ -93,17 +98,18 @@ public class ProductController {
      */
     @PostMapping("/{userEmail}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseData register(@RequestBody @Valid ProductRequest form, @PathVariable(name = "userEmail")String userEmail) {
+    public void register(@Valid ProductRequest form, @PathVariable(name = "userEmail")String userEmail) throws IOException {
 
         Product product = Product.builder()
                 .productName(form.getProductName())
                 .productDescription(form.getProductDescription())
                 .productPrice(form.getProductPrice())
                 .deposit(form.getDeposit())
-                .productImg(form.getProductImg())
                 .build();
 
         Product result = productService.register(product,userEmail);
+
+        productImageService.save(form.getProductImages(), result);
 
         ProductResponse responseProduct = ProductResponse.builder()
                 .productId(result.getId())
@@ -111,10 +117,9 @@ public class ProductController {
                 .productPrice(result.getProductPrice())
                 .deposit(result.getDeposit())
                 .productDescription(result.getProductDescription())
-                .productImg(result.getProductImg())
                 .build();
 
-        return new ResponseData(responseProduct);
+       // return new ResponseData(responseProduct);
     }
 
     /**

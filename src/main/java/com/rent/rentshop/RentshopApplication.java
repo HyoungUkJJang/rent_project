@@ -14,9 +14,10 @@ public class RentshopApplication {
 			"classpath:aws.yml";
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(RentshopApplication.class)
-				.properties(APPLICATION_LOCATIONS)
-				.run(args);
+//		new SpringApplicationBuilder(RentshopApplication.class)
+//				.properties(APPLICATION_LOCATIONS)
+//				.run(args);
+		SpringApplication.run(RentshopApplication.class, args);
 	}
 
 }
