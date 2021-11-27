@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProductResponse {
 
-    private Long productId;
+    private Long id;
     private String productName;
     private int productPrice;
     private int deposit;
@@ -23,8 +23,8 @@ public class ProductResponse {
     private List<ProductImageResponse> productImages;
 
     @Builder
-    public ProductResponse(Long productId, String productName, int productPrice, int deposit, String productDescription, List<ProductImageResponse> productImages) {
-        this.productId = productId;
+    public ProductResponse(Long id, String productName, int productPrice, int deposit, String productDescription, List<ProductImageResponse> productImages) {
+        this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
         this.deposit = deposit;

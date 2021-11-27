@@ -56,7 +56,7 @@ public class OwnerRentController {
 
         Rent findRent = ownerRentService.rentComplete(userEmail, rentId);
         RentCompleteResponse result = RentCompleteResponse.builder()
-                .rentId(findRent.getId())
+                .id(findRent.getId())
                 .productName(findRent.getProduct().getProductName())
                 .productPrice(findRent.getProduct().getProductPrice())
                 .deposit(findRent.getProduct().getDeposit())

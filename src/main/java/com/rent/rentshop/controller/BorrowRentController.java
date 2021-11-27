@@ -7,7 +7,6 @@ import com.rent.rentshop.rent.borrow_user.dto.MyRentResponse;
 import com.rent.rentshop.rent.borrow_user.dto.MyRentReturnResponse;
 import com.rent.rentshop.rent.borrow_user.dto.RentRequest;
 import com.rent.rentshop.rent.borrow_user.dto.RentResponse;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +38,7 @@ public class BorrowRentController {
         Rent rent = borrowRentService.createRent(userEmail, productId, rentRequest);
 
         RentResponse result = RentResponse.builder()
-                .rentId(rent.getId())
+                .id(rent.getId())
                 .productName(rent.getProduct().getProductName())
                 .rentalDate(rent.getRentalDate())
                 .returnDate(rent.getRentalDate())

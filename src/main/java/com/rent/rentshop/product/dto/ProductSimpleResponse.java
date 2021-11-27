@@ -12,15 +12,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProductSimpleResponse {
 
-    private Long productId;
+    private Long id;
     private String productName;
     private int productPrice;
     private int deposit;
     private String thumbnailImage;
 
     @Builder
-    public ProductSimpleResponse(Long productId, String productName, int productPrice, int deposit, String thumbnailImage) {
-        this.productId = productId;
+    public ProductSimpleResponse(Long id, String productName, int productPrice, int deposit, String thumbnailImage) {
+        this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
         this.deposit = deposit;

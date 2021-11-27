@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 public class RentCompleteResponse {
 
-    private Long rentId;
+    private Long id;
     private String productName;
     private int productPrice;
     private int deposit;
@@ -21,9 +21,8 @@ public class RentCompleteResponse {
     private LocalDateTime returnDate;
 
     @Builder
-    public RentCompleteResponse(Long rentId, String productName, int productPrice, int deposit,
-                                String borrowUserEmail, String ownerUserMail, LocalDateTime rentalDate, LocalDateTime returnDate) {
-        this.rentId = rentId;
+    public RentCompleteResponse(Long id, String productName, int productPrice, int deposit, String borrowUserEmail, String ownerUserMail, LocalDateTime rentalDate, LocalDateTime returnDate) {
+        this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
         this.deposit = deposit;
@@ -32,6 +31,5 @@ public class RentCompleteResponse {
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
     }
-
 }
 

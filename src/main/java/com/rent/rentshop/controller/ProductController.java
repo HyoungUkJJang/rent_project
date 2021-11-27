@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/rent/products")
 public class ProductController {
 
+    private String serverAddress = "34.133.252.24:8080/static/img/products/";
     private final ProductService productService;
     private final ProductImageService productImageService;
 
@@ -42,7 +43,7 @@ public class ProductController {
                         p.getProductName(),
                         p.getProductPrice(),
                         p.getDeposit(),
-                        p.getProductImages().get(0).getServerFileName())
+                        serverAddress+p.getProductImages().get(0).getServerFileName())
                 ).collect(Collectors.toList());
 
         return new ResponseData(products);
@@ -64,7 +65,7 @@ public class ProductController {
                         r.getProductName(),
                         r.getProductPrice(),
                         r.getDeposit(),
-                        r.getProductImages().get(0).getServerFileName()
+                        serverAddress+r.getProductImages().get(0).getServerFileName()
                 ))
                 .collect(Collectors.toList());
 
@@ -83,7 +84,7 @@ public class ProductController {
         Product findProduct = productService.getProduct(id);
 
         ProductResponse productResponseDto = ProductResponse.builder()
-                .productId(findProduct.getId())
+                .id(findProduct.getId())
                 .productName(findProduct.getProductName())
                 .productPrice(findProduct.getProductPrice())
                 .deposit(findProduct.getDeposit())
@@ -118,7 +119,7 @@ public class ProductController {
         List<ProductImageResponse> imageResult = imageResponsesConverter(images);
 
         ProductResponse responseProduct = ProductResponse.builder()
-                .productId(result.getId())
+                .id(result.getId())
                 .productName(result.getProductName())
                 .productPrice(result.getProductPrice())
                 .deposit(result.getDeposit())
@@ -163,7 +164,7 @@ public class ProductController {
 
         List<ProductImageResponse> imageResult = productImages.stream().map(i -> new ProductImageResponse(
                 i.getOriginalFileName(),
-                i.getServerFileName()
+                serverAddress+i.getServerFileName()
         )).collect(Collectors.toList());
 
         return imageResult;
