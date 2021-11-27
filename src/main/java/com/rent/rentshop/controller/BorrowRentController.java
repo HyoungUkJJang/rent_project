@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rent/borrow")
+@CrossOrigin
 public class BorrowRentController {
 
     private final BorrowRentService borrowRentService;

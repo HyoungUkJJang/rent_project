@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rent/owner")
+@CrossOrigin
 public class OwnerRentController {
 
     private final OwnerRentService ownerRentService;
