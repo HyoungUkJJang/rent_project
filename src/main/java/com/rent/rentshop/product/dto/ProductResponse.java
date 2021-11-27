@@ -16,20 +16,20 @@ import java.util.List;
 public class ProductResponse {
 
     private Long id;
-    private String productName;
-    private int productPrice;
+    private String name;
+    private int price;
     private int deposit;
-    private String productDescription;
-    private List<ProductImageResponse> productImages;
+    private String description;
+    private List<ProductImageResponse> images;
 
     @Builder
-    public ProductResponse(Long id, String productName, int productPrice, int deposit, String productDescription, List<ProductImageResponse> productImages) {
+    public ProductResponse(Long id, String name, int price, int deposit, String description, List<ProductImageResponse> images) {
         this.id = id;
-        this.productName = productName;
-        this.productPrice = productPrice;
+        this.name = name;
+        this.price = price;
         this.deposit = deposit;
-        this.productDescription = productDescription;
-        this.productImages = productImages;
+        this.description = description;
+        this.images = images;
     }
 
 }

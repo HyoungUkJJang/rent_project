@@ -34,7 +34,7 @@ public class ProductController {
      * @return 상품리스트 응답 도메인
      */
     @GetMapping
-    public ResponseData getProducts() {
+    public List<ProductSimpleResponse> getProducts() {
 
         List<ProductSimpleResponse> products = productService.getProducts()
                 .stream()
@@ -43,11 +43,11 @@ public class ProductController {
                         p.getProductName(),
                         p.getProductPrice(),
                         p.getDeposit(),
-                        p.getProductImages().get(0).getServerFileName())
+                        serverAddress+p.getProductImages().get(0).getServerFileName())
                 ).collect(Collectors.toList());
 
-        return new ResponseData(products);
-
+        //return new ResponseData(products);
+        return products;
     }
 
     /**
@@ -56,7 +56,7 @@ public class ProductController {
      * @return
      */
     @GetMapping("/myproduct/{userEmail}")
-    public ResponseData getMyProductList(@PathVariable("userEmail") String userEmail) {
+    public List<ProductSimpleResponse> getMyProductList(@PathVariable("userEmail") String userEmail) {
 
         List<Product> myProducts = productService.getMyProducts(userEmail);
         List<ProductSimpleResponse> result = myProducts.stream()
@@ -65,12 +65,12 @@ public class ProductController {
                         r.getProductName(),
                         r.getProductPrice(),
                         r.getDeposit(),
-                        r.getProductImages().get(0).getServerFileName()
+                        serverAddress+r.getProductImages().get(0).getServerFileName()
                 ))
                 .collect(Collectors.toList());
 
-        return new ResponseData(result);
-
+       // return new ResponseData(result);
+        return result;
     }
 
     /**
@@ -85,11 +85,11 @@ public class ProductController {
 
         ProductResponse productResponseDto = ProductResponse.builder()
                 .id(findProduct.getId())
-                .productName(findProduct.getProductName())
-                .productPrice(findProduct.getProductPrice())
+                .name(findProduct.getProductName())
+                .price(findProduct.getProductPrice())
                 .deposit(findProduct.getDeposit())
-                .productDescription(findProduct.getProductDescription())
-                .productImages(
+                .description(findProduct.getProductDescription())
+                .images(
                         imageResponsesConverter(findProduct.getProductImages())
                 )
                 .build();
@@ -108,23 +108,23 @@ public class ProductController {
     public ResponseData register(@Valid ProductRequest form, @PathVariable(name = "userEmail")String userEmail) throws IOException {
 
         Product product = Product.builder()
-                .productName(form.getProductName())
-                .productDescription(form.getProductDescription())
-                .productPrice(form.getProductPrice())
+                .productName(form.getName())
+                .productDescription(form.getDescription())
+                .productPrice(form.getPrice())
                 .deposit(form.getDeposit())
                 .build();
         Product result = productService.register(product,userEmail);
 
-        List<ProductImage> images = productImageService.save(form.getProductImages(), result);
+        List<ProductImage> images = productImageService.save(form.getImages(), result);
         List<ProductImageResponse> imageResult = imageResponsesConverter(images);
 
         ProductResponse responseProduct = ProductResponse.builder()
                 .id(result.getId())
-                .productName(result.getProductName())
-                .productPrice(result.getProductPrice())
+                .name(result.getProductName())
+                .price(result.getProductPrice())
                 .deposit(result.getDeposit())
-                .productDescription(result.getProductDescription())
-                .productImages(imageResult)
+                .description(result.getProductDescription())
+                .images(imageResult)
                 .build();
 
         return new ResponseData(responseProduct);
@@ -164,7 +164,7 @@ public class ProductController {
 
         List<ProductImageResponse> imageResult = productImages.stream().map(i -> new ProductImageResponse(
                 i.getOriginalFileName(),
-                i.getServerFileName()
+                serverAddress+i.getServerFileName()
         )).collect(Collectors.toList());
 
         return imageResult;

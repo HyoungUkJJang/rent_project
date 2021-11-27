@@ -16,20 +16,20 @@ import javax.validation.constraints.NotNull;
 public class ProductUpdate {
 
     @NotEmpty(message = "상품 이름은 필수입니다.")
-    private String productName;
+    private String name;
     @NotNull(message = "상품 가격은 필수입니다.")
-    private int productPrice;
+    private int price;
     @NotNull(message = "보증금은 필수입니다.")
     private int deposit;
 
-    private String productDescription;
+    private String description;
 
     @Builder
-    public ProductUpdate(String productName, int productPrice, int deposit, String productDescription) {
-        this.productName = productName;
-        this.productPrice = productPrice;
+    public ProductUpdate(String name, int price, int deposit, String description) {
+        this.name = name;
+        this.price = price;
         this.deposit = deposit;
-        this.productDescription = productDescription;
+        this.description = description;
     }
 
 }

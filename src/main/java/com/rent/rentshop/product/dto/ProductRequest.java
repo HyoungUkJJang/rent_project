@@ -18,23 +18,22 @@ import java.util.List;
 public class ProductRequest {
 
     @NotEmpty(message = "상품 이름은 필수입니다.")
-    private String productName;
+    private String name;
     @NotNull(message = "상품 가격은 필수입니다.")
-    private int productPrice;
+    private int price;
     @NotNull(message = "보증금은 필수입니다.")
     private int deposit;
 
-    private String productDescription;
-    private List<MultipartFile> productImages;
+    private String description;
+    private List<MultipartFile> images;
 
     @Builder
-    public ProductRequest(String productName, int productPrice, int deposit, String productDescription, List<MultipartFile> productImages) {
-        this.productName = productName;
-        this.productPrice = productPrice;
+    public ProductRequest(String name, int price, int deposit, String description, List<MultipartFile> images) {
+        this.name = name;
+        this.price = price;
         this.deposit = deposit;
-        this.productDescription = productDescription;
-        this.productImages = productImages;
+        this.description = description;
+        this.images = images;
     }
-
 
 }

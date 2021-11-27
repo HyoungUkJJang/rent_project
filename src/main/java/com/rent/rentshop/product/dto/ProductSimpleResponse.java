@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 public class ProductSimpleResponse {
 
     private Long id;
-    private String productName;
-    private int productPrice;
+    private String name;
+    private int price;
     private int deposit;
     private String thumbnailImage;
 
     @Builder
-    public ProductSimpleResponse(Long id, String productName, int productPrice, int deposit, String thumbnailImage) {
+    public ProductSimpleResponse(Long id, String name, int price, int deposit, String thumbnailImage) {
         this.id = id;
-        this.productName = productName;
-        this.productPrice = productPrice;
+        this.name = name;
+        this.price = price;
         this.deposit = deposit;
         this.thumbnailImage = thumbnailImage;
     }

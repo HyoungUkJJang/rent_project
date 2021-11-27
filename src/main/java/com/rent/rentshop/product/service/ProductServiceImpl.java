@@ -64,9 +64,9 @@ public class ProductServiceImpl implements ProductService{
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException());
 
         product.updateProduct(
-                form.getProductName(),
-                form.getProductDescription(),
-                form.getProductPrice(),
+                form.getName(),
+                form.getDescription(),
+                form.getPrice(),
                 form.getDeposit());
 
     }
