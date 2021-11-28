@@ -1,17 +1,11 @@
-file:
-  dir:
-    product: /home/ukjjangstudy/rentshop/files/products/
-
-
 spring:
   datasource:
-    url : jdbc:mysql://localhost:3306/rentshop?serverTimezone=Asia/Seoul
-    username: root
-    password: 1234
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:h2:~/rent/rentshop
+    url : jdbc:h2:tcp://localhost/~/rentshop
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
   jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: create
     properties:
@@ -19,5 +13,35 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
 
+file:
+  dir:
+    product: /Users/uh/Documents/work/project/my_lab/file/products/
+
+#spring:
+#  datasource:
+#    url : jdbc:mysql://localhost:3306/rentshop?serverTimezone=Asia/Seoul
+#    username: root
+#    password:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+
 jwt:
   secret: "1234567890123456789012345678901234567890"
+
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#  h2:
+#    console:
+#      enabled: true
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        default_batch_fetch_size: 100

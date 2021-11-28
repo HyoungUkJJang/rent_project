@@ -1,6 +1,5 @@
 package com.rent.rentshop.rent.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.product.domain.Product;
 import lombok.Builder;

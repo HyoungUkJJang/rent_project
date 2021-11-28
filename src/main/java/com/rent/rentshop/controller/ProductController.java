@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/rent/products")
+@CrossOrigin
 public class ProductController {
 
     private String serverAddress = "34.133.252.24:8080/static/img/products/";
@@ -43,7 +44,7 @@ public class ProductController {
                         p.getProductName(),
                         p.getProductPrice(),
                         p.getDeposit(),
-                        serverAddress+p.getProductImages().get(0).getServerFileName())
+                        p.getProductImages().get(0).getServerFileName())
                 ).collect(Collectors.toList());
 
         //return new ResponseData(products);
@@ -65,7 +66,7 @@ public class ProductController {
                         r.getProductName(),
                         r.getProductPrice(),
                         r.getDeposit(),
-                        serverAddress+r.getProductImages().get(0).getServerFileName()
+                        r.getProductImages().get(0).getServerFileName()
                 ))
                 .collect(Collectors.toList());
 
@@ -164,7 +165,7 @@ public class ProductController {
 
         List<ProductImageResponse> imageResult = productImages.stream().map(i -> new ProductImageResponse(
                 i.getOriginalFileName(),
-                serverAddress+i.getServerFileName()
+                i.getServerFileName()
         )).collect(Collectors.toList());
 
         return imageResult;
