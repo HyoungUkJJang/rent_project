@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * 회원가입 요청
+ * 회원가입 요청 도메인
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -41,7 +41,7 @@ public class LoginServiceImpl implements LoginService{
             Claims decode = jwtUtil.parseToken(accessToken);
             String userEmail = decode.get("email", String.class);
             return userEmail;
-        }catch (SignatureException e) {
+        } catch (SignatureException e) {
             throw new UnauthorizedException();
         }
 
