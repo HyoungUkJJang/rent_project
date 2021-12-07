@@ -9,8 +9,13 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    boolean existsByUserEmail(String userEmail);
+    /**
+     * 이메일을 중복체크 합니다.
+     * @param email 검사 할 이메일
+     * @return 중복이면 true | 중복이 아니면 false
+     */
+    boolean existsByEmail(String email);
 
-    Optional<User> findByUserEmail(String userEmail);
+    Optional<User> findByEmail(String email);
 
 }

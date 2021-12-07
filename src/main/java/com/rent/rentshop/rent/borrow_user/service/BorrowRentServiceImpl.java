@@ -29,7 +29,7 @@ public class BorrowRentServiceImpl implements BorrowRentService {
     @Transactional
     public Rent createRent(String userEmail, Long productId, RentRequest rentRequest) {
 
-        User findUser = userRepository.findByUserEmail(userEmail)
+        User findUser = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UserNotFoundException());
 
         Product findProduct = productRepository.findById(productId)
@@ -51,7 +51,7 @@ public class BorrowRentServiceImpl implements BorrowRentService {
     @Transactional
     public Rent returnedMyRental(Long productId, String userEmail) {
 
-        User findUser = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
+        User findUser = userRepository.findByEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
 
         Rent result = borrowRentRepository.returnedMyRental(productId, findUser.getId());
         result.rentReturnWait();
@@ -63,7 +63,7 @@ public class BorrowRentServiceImpl implements BorrowRentService {
     @Override
     public List<Rent> findMyRent(String userEmail) {
 
-        User findUser = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
+        User findUser = userRepository.findByEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
 
         List<Rent> findMyRents = borrowRentRepository.getMyApplyRentList(findUser.getId());
         return findMyRents;

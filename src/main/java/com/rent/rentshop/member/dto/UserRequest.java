@@ -15,29 +15,35 @@ import javax.validation.constraints.NotEmpty;
 public class UserRequest {
 
     @NotEmpty(message = "이메일은 필수입니다.")
-    private String userEmail;
+    private String email;
     @NotEmpty(message = "패스워드는 필수입니다.")
     private String password;
     @NotEmpty(message = "이름은 필수입니다.")
-    private String userName;
+    private String name;
     @NotEmpty(message = "휴대폰 번호는 필수입니다.")
-    private String userPhone;
+    private String phone;
+    @NotEmpty(message = "은행 이름은 필수입니다.")
+    private String bankName;
+    @NotEmpty(message = "계좌번호는 필수입니다.")
+    private String account;
     @NotEmpty(message = "도로명 주소는 필수입니다.")
     private String roadAddress;
     @NotEmpty(message = "상세 주소는 필수입니다.")
     private String detailAddress;
 
-    private String userBirth;
+    private String birth;
 
     @Builder
-    public UserRequest(String userEmail, String password, String userName, String userPhone, String roadAddress, String detailAddress, String userBirth) {
-        this.userEmail = userEmail;
+    public UserRequest(String email, String password, String name, String phone, String bankName, String account, String roadAddress, String detailAddress, String birth) {
+        this.email = email;
         this.password = password;
-        this.userName = userName;
-        this.userPhone = userPhone;
+        this.name = name;
+        this.phone = phone;
+        this.bankName = bankName;
+        this.account = account;
         this.roadAddress = roadAddress;
         this.detailAddress = detailAddress;
-        this.userBirth = userBirth;
+        this.birth = birth;
     }
 
 }

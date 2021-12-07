@@ -10,7 +10,6 @@ import com.rent.rentshop.member.service.UserService;
 import com.rent.rentshop.common.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,8 +29,8 @@ public class UserController {
         List<UserSimpleResponse> result = userService.getUsers()
                 .stream()
                 .map(u -> new UserSimpleResponse(
-                        u.getUserEmail(),
-                        u.getUserName()))
+                        u.getEmail(),
+                        u.getName()))
                 .collect(Collectors.toList());
 
         return new ResponseData(result);
@@ -43,10 +42,10 @@ public class UserController {
         User findUser = userService.getUser(userEmail);
 
         UserResponse result = UserResponse.builder()
-                .userEmail(findUser.getUserEmail())
-                .userName(findUser.getUserName())
-                .userPhone(findUser.getUserPhone())
-                .userBirth(findUser.getUserBirth())
+                .email(findUser.getEmail())
+                .name(findUser.getName())
+                .phone(findUser.getPhone())
+                .birth(findUser.getBirth())
                 .roadAddress(findUser.getUserAddress().getRoadAddress())
                 .detailAddress(findUser.getUserAddress().getDetailAddress())
                 .build();
@@ -60,23 +59,27 @@ public class UserController {
     public ResponseData register(@RequestBody @Valid UserRequest form) {
 
         User userForm = User.builder()
-                .userEmail(form.getUserEmail())
+                .email(form.getEmail())
                 .password(form.getPassword())
-                .userName(form.getUserName())
-                .userPhone(form.getUserPhone())
-                .userBirth(form.getUserBirth())
+                .name(form.getName())
+                .phone(form.getPhone())
+                .birth(form.getBirth())
+                .bankName(form.getBankName())
+                .account(form.getAccount())
                 .userAddress(new Address(form.getRoadAddress(), form.getDetailAddress()))
                 .build();
 
         User joinUser = userService.join(userForm);
 
         UserResponse result = UserResponse.builder()
-                .userEmail(joinUser.getUserEmail())
-                .userName(joinUser.getUserName())
-                .userPhone(joinUser.getUserPhone())
-                .userBirth(joinUser.getUserBirth())
+                .email(joinUser.getEmail())
+                .name(joinUser.getName())
+                .phone(joinUser.getPhone())
+                .birth(joinUser.getBirth())
                 .roadAddress(joinUser.getUserAddress().getRoadAddress())
                 .detailAddress(joinUser.getUserAddress().getDetailAddress())
+                .bankName(joinUser.getBankName())
+                .account(joinUser.getAccount())
                 .build();
 
         return new ResponseData(result);

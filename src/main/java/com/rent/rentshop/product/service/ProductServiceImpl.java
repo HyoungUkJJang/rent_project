@@ -84,7 +84,7 @@ public class ProductServiceImpl implements ProductService{
      * @return
      */
     private User getFindUser(String userEmail) {
-        return userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
+        return userRepository.findByEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
     }
 
 }

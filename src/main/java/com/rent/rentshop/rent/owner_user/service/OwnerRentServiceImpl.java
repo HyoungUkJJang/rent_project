@@ -25,7 +25,7 @@ public class OwnerRentServiceImpl implements OwnerRentService{
     @Override
     public List<Rent> getMyProductRentalUserList(String userEmail) {
 
-        User findUser = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
+        User findUser = userRepository.findByEmail(userEmail).orElseThrow(() -> new UserNotFoundException());
 
         List<Rent> result = ownerRentRepository.getMyProductRentalUserList(findUser.getId());
         return result;

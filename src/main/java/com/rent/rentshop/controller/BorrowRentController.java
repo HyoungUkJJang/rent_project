@@ -62,7 +62,7 @@ public class BorrowRentController {
                         m.getProduct().getProductName(),
                         m.getProduct().getProductPrice(),
                         m.getProduct().getDeposit(),
-                        m.getProduct().getUser().getUserEmail(),
+                        m.getProduct().getUser().getEmail(),
                         m.getRentalDate(),
                         m.getReturnDate()))
                 .collect(Collectors.toList());
@@ -86,7 +86,7 @@ public class BorrowRentController {
         Rent returnedMyRental = borrowRentService.returnedMyRental(productId, userEmail);
         MyRentReturnResponse result = MyRentReturnResponse.builder()
                 .productName(returnedMyRental.getProduct().getProductName())
-                .ownerUserEmail(returnedMyRental.getUser().getUserEmail())
+                .ownerUserEmail(returnedMyRental.getUser().getEmail())
                 .rentStatus(returnedMyRental.getRentStatus())
                 .build();
 

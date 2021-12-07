@@ -18,10 +18,10 @@ public interface UserService {
 
     /**
      * 사용자의 상세정보를 조회하여 리턴합니다.
-     * @param userEmail 조회할 사용자의 아이디
+     * @param email 조회할 사용자의 아이디
      * @return 조회된 사용자
      */
-    User getUser(String userEmail);
+    User getUser(String email);
 
     /**
      * 사용자를 저장소에 저장후 리턴합니다.
@@ -32,22 +32,22 @@ public interface UserService {
 
     /**
      * 사용자 이메일이 중복인지 검증합니다.
-     * @param userEmail 검증할 이메일
+     * @param email 검증할 이메일
      * @return true - 이메일 | false - 이메일 사용가능
      */
-    boolean userEmailCheck(String userEmail);
+    boolean userEmailCheck(String email);
 
     /**
      * 사용자의 정보를 수정합니다.
-     * @param userEmail 수정할 사용자의 아이디
+     * @param email 수정할 사용자의 아이디
      * @param form 수정될 사용자의 정보
      */
-    void userUpdate(String userEmail, UserUpdate form);
+    void userUpdate(String email, UserUpdate form);
 
     /**
      * 사용자를 삭제합니다.
-     * @param userEmail 삭제할 사용자 아이디
+     * @param email 삭제할 사용자 아이디
      */
-    void userDelete(String userEmail);
+    void userDelete(String email);
 
 }

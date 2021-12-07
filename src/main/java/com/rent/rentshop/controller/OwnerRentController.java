@@ -35,8 +35,8 @@ public class OwnerRentController {
         List<MyProductReservationResponse> result = myReservationRents.stream()
                 .map(r -> new MyProductReservationResponse(
                         r.getId(),
-                        r.getUser().getUserEmail(),
-                        r.getProduct().getUser().getUserEmail(),
+                        r.getUser().getEmail(),
+                        r.getProduct().getUser().getEmail(),
                         r.getProduct().getProductName(),
                         r.getRentalDate(),
                         r.getRentalDate()
@@ -61,8 +61,8 @@ public class OwnerRentController {
                 .productName(findRent.getProduct().getProductName())
                 .productPrice(findRent.getProduct().getProductPrice())
                 .deposit(findRent.getProduct().getDeposit())
-                .ownerUserMail(findRent.getProduct().getUser().getUserEmail())
-                .borrowUserEmail(findRent.getUser().getUserEmail())
+                .ownerUserMail(findRent.getProduct().getUser().getEmail())
+                .borrowUserEmail(findRent.getUser().getEmail())
                 .rentalDate(findRent.getRentalDate())
                 .returnDate(findRent.getReturnDate())
                 .build();
@@ -75,7 +75,7 @@ public class OwnerRentController {
         Rent findRent = ownerRentService.returnedComplete(rentId);
         ReturnCompleteResponse result = ReturnCompleteResponse.builder()
                 .productName(findRent.getProduct().getProductName())
-                .borrowedUserEmail(findRent.getUser().getUserEmail())
+                .borrowedUserEmail(findRent.getUser().getEmail())
                 .rentStatus(findRent.getRentStatus())
                 .build();
 
