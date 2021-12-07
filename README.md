@@ -1,5 +1,7 @@
-# project-spring-3-HyoungUkJJang
+# 렌트마켓
 
+### 프로젝트 소개
+https://www.notion.so/4cb43b6d606b4261aaf0d96c2ac66aaa
 
 ### 이 앱은 언제 사용하나요 ?
 * 집에 전자기기, 자전거, 기타 물품들을 구매했는데 사용하고 있지 않은경우
