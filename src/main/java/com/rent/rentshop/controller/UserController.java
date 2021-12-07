@@ -4,10 +4,8 @@ import com.rent.rentshop.member.domain.Address;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.member.dto.UserRequest;
 import com.rent.rentshop.member.dto.UserResponse;
-import com.rent.rentshop.member.dto.UserSimpleResponse;
 import com.rent.rentshop.member.dto.UserUpdate;
 import com.rent.rentshop.member.service.UserService;
-import com.rent.rentshop.common.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,38 +23,29 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseData getUsers() {
-        List<UserSimpleResponse> result = userService.getUsers()
+    public List<UserResponse.UserSimpleResponse> getUsers() {
+
+        List<UserResponse.UserSimpleResponse> result = userService.getUsers()
                 .stream()
-                .map(u -> new UserSimpleResponse(
+                .map(u -> new UserResponse.UserSimpleResponse(
                         u.getEmail(),
                         u.getName()))
                 .collect(Collectors.toList());
 
-        return new ResponseData(result);
+        return result;
     }
 
     @GetMapping("/{userEmail}")
-    public ResponseData getUser(@PathVariable("userEmail") String userEmail) {
+    public UserResponse.UserDetailResponse getUser(@PathVariable("userEmail") String userEmail) {
 
         User findUser = userService.getUser(userEmail);
-
-        UserResponse result = UserResponse.builder()
-                .email(findUser.getEmail())
-                .name(findUser.getName())
-                .phone(findUser.getPhone())
-                .birth(findUser.getBirth())
-                .roadAddress(findUser.getUserAddress().getRoadAddress())
-                .detailAddress(findUser.getUserAddress().getDetailAddress())
-                .build();
-
-        return new ResponseData(result);
+        return UserResponse.toDetailUser(findUser);
 
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseData register(@RequestBody @Valid UserRequest form) {
+    public UserResponse.UserDetailResponse register(@RequestBody @Valid UserRequest form) {
 
         User userForm = User.builder()
                 .email(form.getEmail())
@@ -70,19 +59,7 @@ public class UserController {
                 .build();
 
         User joinUser = userService.join(userForm);
-
-        UserResponse result = UserResponse.builder()
-                .email(joinUser.getEmail())
-                .name(joinUser.getName())
-                .phone(joinUser.getPhone())
-                .birth(joinUser.getBirth())
-                .roadAddress(joinUser.getUserAddress().getRoadAddress())
-                .detailAddress(joinUser.getUserAddress().getDetailAddress())
-                .bankName(joinUser.getBankName())
-                .account(joinUser.getAccount())
-                .build();
-
-        return new ResponseData(result);
+        return UserResponse.toDetailUser(joinUser);
 
     }
 
