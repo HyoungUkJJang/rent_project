@@ -79,10 +79,6 @@ dependencies {
 	 */
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.4.1'
 
-//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-//	// MySql
-//	implementation 'mysql:mysql-connector-java'
-
 	/**
 	 * *************
 	 * ***Swagger***
