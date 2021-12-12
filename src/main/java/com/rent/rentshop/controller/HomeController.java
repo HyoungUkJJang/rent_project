@@ -11,8 +11,7 @@ public class HomeController {
 
     @GetMapping("")
     public String healthCheck() {
-        return "Don't worry the server is alive!!!\n" +
-                "CI/CD Test version2 ^-^!";
+        return "Health Check !";
     }
 
 }

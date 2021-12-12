@@ -3,10 +3,6 @@
 REPOSITORY=/home/ec2-user/app/deploy
 PROJECT_NAME=rentshop
 
-# echo "> build 파일 복사"
-
-# cp $REPOSITORY/$PROJECT_NAME/build/libs/*.jar $REPOSITORY/
-
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
 CURRENT_PID=$(pgrep -f ${PROJECT_NAME}.*.jar)
@@ -31,4 +27,3 @@ nohup java -jar \
   -Dspring.config.location=classpath:/application.yml,/home/ec2-user/app/application-real-db.yml,classpath:/application-real.yml \
   -Dspring.profiles.active=real \
   $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
-#  $REPOSITORY/$JAR_NAME 2>&1 &
