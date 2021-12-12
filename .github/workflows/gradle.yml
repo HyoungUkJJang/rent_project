@@ -58,6 +58,7 @@ jobs:
         --acl private \
         ./rentservice-project-build.zip s3://rentservice-project-build/
 
+
     # Deploy
     - name: Deploy
       env:
