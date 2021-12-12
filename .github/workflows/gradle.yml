@@ -69,7 +69,7 @@ jobs:
         --application-name rentservice-project \
         --deployment-group-name rent-service-project-group \
         --file-exists-behavior OVERWRITE \
-        --s3-location bucket=rentservice-project-build,bundleType=zip, key=rentservice-project-build.zip \
+        --s3-location bucket=rentservice-project-build,bundleType=zip,key=rentservice-project-build.zip \
         --region ap-northeast-2
 
 #     - name: Build with Gradle
