@@ -72,9 +72,16 @@ dependencies {
 	 */
 	implementation 'com.querydsl:querydsl-jpa'
 
+	/**
+	 * **************
+	 * ***Maria DB***
+	 * **************
+	 */
+	implementation 'org.mariadb.jdbc:mariadb-java-client:2.4.1'
 
-	// MySql
-	implementation 'mysql:mysql-connector-java'
+//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+//	// MySql
+//	implementation 'mysql:mysql-connector-java'
 
 	/**
 	 * *************
