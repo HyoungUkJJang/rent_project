@@ -1,6 +1,6 @@
 # !/bin/bash
 
-REPOSITRY=/home/ec2-user/app/deploy
+REPOSITORY=/home/ec2-user/app/deploy
 PROJECT_NAME=rentshop
 
 # echo "> build 파일 복사"
