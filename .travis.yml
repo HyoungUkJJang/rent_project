@@ -6,7 +6,6 @@ branches:
   only:
     - master
 
-
 # Permission Denied
 before_install:
   - chmod +x gradlew
