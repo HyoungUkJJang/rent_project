@@ -41,7 +41,7 @@ jobs:
 
     # 압축파일 형태로 전달
     - name: Make zip file
-      run: zip -r -qq -j ./springboot-intro-build.zip ./deploy
+      run: zip -r -qq -j ./rentservice-project-build.zip ./deploy
 
     # S3 버킷으로 카피
     - name: Deliver to AWS S3
@@ -52,7 +52,7 @@ jobs:
         aws s3 cp \
         --region ap-northeast-2 \
         --acl private \
-         ./springboot-intro-build.zip s3://rentservice-project-build/
+         ./rentservice-project-build.zip s3://rentservice-project-build/
 
 #     - name: Build with Gradle
 #       uses: gradle/gradle-build-action@4137be6a8bf7d7133955359dbd952c0ca73b1021
