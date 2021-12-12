@@ -66,7 +66,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         aws deploy create-deployment \
-        --application-name rentservice-project \
+        --application-name rent-service-project \
         --deployment-group-name rent-service-project-group \
         --file-exists-behavior OVERWRITE \
         --s3-location bucket=rentservice-project-build,bundleType=zip,key=rentservice-project-build.zip \
