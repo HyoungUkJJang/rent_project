@@ -4,13 +4,13 @@ import com.rent.rentshop.common.ResponseData;
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.domain.ProductImage;
 import com.rent.rentshop.product.dto.*;
-import com.rent.rentshop.product.file.ProductFileStore;
 import com.rent.rentshop.product.service.ProductImageService;
 import com.rent.rentshop.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -31,24 +31,17 @@ public class ProductController {
     private final ProductImageService productImageService;
 
     /**
-     * 상품 전체를 조회하여 상품목록을 반환 후 200 상태코드를 반환합니다.
+     * 상품 전체를 슬라이스 형태로 조회하여 변환된 상품목록을 반환 후 200 상태코드를 반환합니다.
      * @return 상품리스트 응답 도메인
      */
     @GetMapping
-    public List<ProductSimpleResponse> getProducts() {
+    public Slice<ProductSimpleResponse> getProducts(Pageable pageable) {
 
-        List<ProductSimpleResponse> products = productService.getProducts()
-                .stream()
-                .map(p -> new ProductSimpleResponse(
-                        p.getId(),
-                        p.getProductName(),
-                        p.getProductPrice(),
-                        p.getDeposit(),
-                        p.getProductImages().get(0).getServerFileName())
-                ).collect(Collectors.toList());
+        Slice<ProductSimpleResponse> result = productService.getProducts(pageable)
+                .map(ProductSimpleResponse::new);
 
-        //return new ResponseData(products);
-        return products;
+        return result;
+
     }
 
     /**
@@ -154,7 +147,6 @@ public class ProductController {
         productService.delete(id);
 
     }
-
 
     /**
      * 조회용 이미지 리스트로 변환합니다.

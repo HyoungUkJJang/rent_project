@@ -4,12 +4,12 @@ import com.rent.rentshop.error.ProductNotFoundException;
 import com.rent.rentshop.error.UserNotFoundException;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.member.repository.UserRepository;
-import com.rent.rentshop.member.service.UserService;
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.dto.ProductUpdate;
-import com.rent.rentshop.product.file.ProductFileStore;
 import com.rent.rentshop.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +24,8 @@ public class ProductServiceImpl implements ProductService{
     private final UserRepository userRepository;
 
     @Override
-    public List<Product> getProducts() {
-        return productRepository.findAll();
+    public Slice<Product> getProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.rent.rentshop.product.dto;
 
+import com.rent.rentshop.product.domain.Product;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,4 +28,11 @@ public class ProductSimpleResponse {
         this.thumbnailImage = thumbnailImage;
     }
 
+    public ProductSimpleResponse(Product product) {
+        this.id = product.getId();
+        this.name = product.getProductName();
+        this.price = product.getProductPrice();
+        this.deposit = product.getDeposit();
+        this.thumbnailImage = product.getProductImages().get(0).getServerFileName();
+    }
 }

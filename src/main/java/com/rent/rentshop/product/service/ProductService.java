@@ -2,6 +2,9 @@ package com.rent.rentshop.product.service;
 
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.dto.ProductUpdate;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+
 import java.util.List;
 
 /**
@@ -10,10 +13,10 @@ import java.util.List;
 public interface ProductService {
 
     /**
-     * 상품 전체를 조회해 상품목록을 리턴합니다.
+     * 상품 전체를 조회해 상품목록을 슬라이스 형태로 리턴합니다.
      * @return 상품 리스트
      */
-    List<Product> getProducts();
+    Slice<Product> getProducts(Pageable pageable);
 
     /**
      * 사용자가 등록한 상품만 조회해 상품목록을 리턴합니다.
