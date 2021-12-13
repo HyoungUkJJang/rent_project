@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class ProductImage {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "image_id")
     private Long id;
     private String originalFileName;
