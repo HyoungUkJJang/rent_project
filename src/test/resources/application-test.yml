@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url : jdbc:h2:~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+  data:
+    web:
+      pageable:
+        default-page-size: 20
+        max-page-size: 2000
+
+file:
+  dir:
+    product: /Users/uh/Documents/work/project/my_lab/file/products/
+
+jwt:
+  secret: "1234567890123456789012345678901234567890"
+
