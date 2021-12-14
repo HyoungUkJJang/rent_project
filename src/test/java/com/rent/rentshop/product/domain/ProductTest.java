@@ -13,10 +13,10 @@ class ProductTest {
     @BeforeEach
     void prepare() {
         product = Product.builder()
-                .productName("product1")
-                .productPrice(5000)
+                .name("product1")
+                .price(5000)
                 .deposit(10000)
-                .productDescription("description1")
+                .description("description1")
                 .build();
     }
 
@@ -28,7 +28,7 @@ class ProductTest {
         String expectedProductName = "product1";
 
         //WHEN
-        String actualProductName = product.getProductName();
+        String actualProductName = product.getName();
 
         //THEN
         assertEquals(expectedProductName, actualProductName);
@@ -50,7 +50,7 @@ class ProductTest {
                 updatePrice, updateDeposit);
 
         //THEN
-        assertEquals(product.getProductName(),updateProductName);
+        assertEquals(product.getName(),updateProductName);
 
     }
 

@@ -22,9 +22,9 @@ public class Product extends BaseTime {
     @Column(name = "product_id")
     private Long id;
 
-    private String productName;
-    private String productDescription;
-    private int productPrice;
+    private String name;
+    private String description;
+    private int price;
     private int deposit;
 
     @OneToMany(mappedBy = "product")
@@ -38,18 +38,18 @@ public class Product extends BaseTime {
     List<Rent> rents = new ArrayList<>();
 
     @Builder
-    public Product(Long id, String productName, String productDescription, int productPrice, int deposit) {
+    public Product(Long id, String name, String description, int price, int deposit) {
         this.id = id;
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
+        this.name = name;
+        this.description = description;
+        this.price = price;
         this.deposit = deposit;
     }
 
-    public void updateProduct(String productName, String productDescription, int productPrice, int deposit) {
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
+    public void updateProduct(String name, String description, int price, int deposit) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
         this.deposit = deposit;
     }
 

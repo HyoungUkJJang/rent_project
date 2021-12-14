@@ -30,8 +30,8 @@ public class ProductSimpleResponse {
 
     public ProductSimpleResponse(Product product) {
         this.id = product.getId();
-        this.name = product.getProductName();
-        this.price = product.getProductPrice();
+        this.name = product.getName();
+        this.price = product.getPrice();
         this.deposit = product.getDeposit();
         this.thumbnailImage = product.getProductImages().get(0).getServerFileName();
     }

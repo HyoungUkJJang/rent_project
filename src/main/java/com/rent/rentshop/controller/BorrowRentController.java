@@ -40,7 +40,7 @@ public class BorrowRentController {
 
         RentResponse result = RentResponse.builder()
                 .id(rent.getId())
-                .productName(rent.getProduct().getProductName())
+                .productName(rent.getProduct().getName())
                 .rentalDate(rent.getRentalDate())
                 .returnDate(rent.getRentalDate())
                 .build();
@@ -59,8 +59,8 @@ public class BorrowRentController {
         List<Rent> myRent = borrowRentService.findMyRent(userEmail);
         List<MyRentResponse> result = myRent.stream()
                 .map(m -> new MyRentResponse(
-                        m.getProduct().getProductName(),
-                        m.getProduct().getProductPrice(),
+                        m.getProduct().getName(),
+                        m.getProduct().getPrice(),
                         m.getProduct().getDeposit(),
                         m.getProduct().getUser().getEmail(),
                         m.getRentalDate(),
@@ -85,7 +85,7 @@ public class BorrowRentController {
 
         Rent returnedMyRental = borrowRentService.returnedMyRental(productId, userEmail);
         MyRentReturnResponse result = MyRentReturnResponse.builder()
-                .productName(returnedMyRental.getProduct().getProductName())
+                .productName(returnedMyRental.getProduct().getName())
                 .ownerUserEmail(returnedMyRental.getUser().getEmail())
                 .rentStatus(returnedMyRental.getRentStatus())
                 .build();

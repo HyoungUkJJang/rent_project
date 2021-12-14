@@ -56,8 +56,8 @@ public class ProductController {
         List<ProductSimpleResponse> result = myProducts.stream()
                 .map(r -> new ProductSimpleResponse(
                         r.getId(),
-                        r.getProductName(),
-                        r.getProductPrice(),
+                        r.getName(),
+                        r.getPrice(),
                         r.getDeposit(),
                         r.getProductImages().get(0).getServerFileName()
                 ))
@@ -79,10 +79,10 @@ public class ProductController {
 
         ProductResponse productResponseDto = ProductResponse.builder()
                 .id(findProduct.getId())
-                .name(findProduct.getProductName())
-                .price(findProduct.getProductPrice())
+                .name(findProduct.getName())
+                .price(findProduct.getPrice())
                 .deposit(findProduct.getDeposit())
-                .description(findProduct.getProductDescription())
+                .description(findProduct.getDescription())
                 .images(
                         imageResponsesConverter(findProduct.getProductImages())
                 )
@@ -102,9 +102,9 @@ public class ProductController {
     public ResponseData register(@Valid ProductRequest form, @PathVariable(name = "userEmail")String userEmail) throws IOException {
 
         Product product = Product.builder()
-                .productName(form.getName())
-                .productDescription(form.getDescription())
-                .productPrice(form.getPrice())
+                .name(form.getName())
+                .description(form.getDescription())
+                .price(form.getPrice())
                 .deposit(form.getDeposit())
                 .build();
         Product result = productService.register(product,userEmail);
@@ -114,10 +114,10 @@ public class ProductController {
 
         ProductResponse responseProduct = ProductResponse.builder()
                 .id(result.getId())
-                .name(result.getProductName())
-                .price(result.getProductPrice())
+                .name(result.getName())
+                .price(result.getPrice())
                 .deposit(result.getDeposit())
-                .description(result.getProductDescription())
+                .description(result.getDescription())
                 .images(imageResult)
                 .build();
 

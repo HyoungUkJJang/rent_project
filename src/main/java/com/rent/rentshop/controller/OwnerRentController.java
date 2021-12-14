@@ -37,7 +37,7 @@ public class OwnerRentController {
                         r.getId(),
                         r.getUser().getEmail(),
                         r.getProduct().getUser().getEmail(),
-                        r.getProduct().getProductName(),
+                        r.getProduct().getName(),
                         r.getRentalDate(),
                         r.getRentalDate()
                 ))
@@ -58,8 +58,8 @@ public class OwnerRentController {
         Rent findRent = ownerRentService.rentComplete(userEmail, rentId);
         RentCompleteResponse result = RentCompleteResponse.builder()
                 .id(findRent.getId())
-                .productName(findRent.getProduct().getProductName())
-                .productPrice(findRent.getProduct().getProductPrice())
+                .productName(findRent.getProduct().getName())
+                .productPrice(findRent.getProduct().getPrice())
                 .deposit(findRent.getProduct().getDeposit())
                 .ownerUserMail(findRent.getProduct().getUser().getEmail())
                 .borrowUserEmail(findRent.getUser().getEmail())
@@ -74,7 +74,7 @@ public class OwnerRentController {
     public ResponseData rentReturnedComplete(@PathVariable("rentId") Long rentId) {
         Rent findRent = ownerRentService.returnedComplete(rentId);
         ReturnCompleteResponse result = ReturnCompleteResponse.builder()
-                .productName(findRent.getProduct().getProductName())
+                .productName(findRent.getProduct().getName())
                 .borrowedUserEmail(findRent.getUser().getEmail())
                 .rentStatus(findRent.getRentStatus())
                 .build();
