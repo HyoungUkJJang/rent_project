@@ -51,7 +51,7 @@ class ProductTest {
 
         //THEN
         assertEquals(product.getProductName(),updateProductName);
-        
+
     }
 
 }
