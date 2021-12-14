@@ -42,11 +42,16 @@ class ProductTest {
         //GIVEN
         String updateProductName = "updateName";
         String updateDescription = "updateDescription";
-        String updateImg = "updateImg";
         int updateDeposit = 20000;
         int updatePrice = 10000;
 
-    }
+        //WHEN
+        product.updateProduct(updateProductName, updateDescription,
+                updatePrice, updateDeposit);
 
+        //THEN
+        assertEquals(product.getProductName(),updateProductName);
+
+    }
 
 }
