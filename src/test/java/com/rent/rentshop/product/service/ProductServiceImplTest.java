@@ -4,6 +4,7 @@ import com.rent.rentshop.member.domain.Address;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.member.repository.UserRepository;
 import com.rent.rentshop.product.domain.Product;
+import com.rent.rentshop.product.dto.ProductUpdate;
 import com.rent.rentshop.product.repository.ProductRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * getMyProducts []
  * getProduct [v]
  * register [v]
- * update []
+ * update [v]
  * delete [v]
  */
 @DataJpaTest
@@ -29,6 +37,8 @@ class ProductServiceImplTest {
 
     private String userEmail;
     private ProductService productService;
+    private ValidatorFactory factory;
+    private Validator validator;
 
     @Autowired
     private ProductRepository productRepository;
@@ -37,10 +47,11 @@ class ProductServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        User user = createUser();
-        User result = userRepository.save(user);
-        userEmail = result.getEmail();
         productService = new ProductServiceImpl(productRepository, userRepository);
+        User user = userRepository.save(createUser());
+        userEmail = user.getEmail();
+        factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
     }
 
     @AfterEach
@@ -161,6 +172,69 @@ class ProductServiceImplTest {
 
         }
 
+    }
+
+    @Nested
+    @DisplayName("update 메서드는")
+    class Describe_update {
+
+        @Nested
+        @DisplayName("자신의 상품 중 수정하고 싶은 내용이 있을 경우에")
+        class Context_exist_update_product {
+
+            Long productId;
+            ProductUpdate updateForm;
+
+            @BeforeEach
+            void prepare() {
+                Product registerProduct = productService.register(createProduct(), userEmail);
+                productId = registerProduct.getId();
+                updateForm = ProductUpdate.builder()
+                        .name("updateName1")
+                        .price(10000)
+                        .deposit(300000)
+                        .description("updateDescription1")
+                        .build();
+            }
+
+            @Test
+            @DisplayName("상품 아이디와 수정 폼을 전달받아 상품의 내용을 수정한다.")
+            void It_void_update_product() {
+                productService.update(productId, updateForm);
+                Product findProduct = productService.getProduct(productId);
+
+                assertEquals(updateForm.getName(), findProduct.getName());
+                assertEquals(updateForm.getPrice(), findProduct.getPrice());
+                assertEquals(updateForm.getDescription(), findProduct.getDescription());
+                assertEquals(updateForm.getDeposit(), findProduct.getDeposit());
+
+            }
+
+        }
+
+        @Nested
+        @DisplayName("상품들의 수정 내용 중 빈 값이 들어올 경우에")
+        class Context_blank_update_product {
+
+            Long productId;
+            ProductUpdate updateForm;
+
+            @BeforeEach
+            void prepare() {
+                Product registerProduct = productService.register(createProduct(), userEmail);
+                productId = registerProduct.getId();
+                updateForm = ProductUpdate.builder()
+                        .build();
+            }
+
+            @Test
+            @DisplayName("벨리데이션 검증을 통해 사용자에게 비어있는 값 정보를 전달한다.")
+            void It_return_not_blank_exception() {
+                Set<ConstraintViolation<ProductUpdate>> validate = validator.validate(updateForm);
+                assertThat(validate).isNotEmpty();
+            }
+
+        }
     }
 
     @Nested
