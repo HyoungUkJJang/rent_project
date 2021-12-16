@@ -5,13 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @NoArgsConstructor
 @Embeddable
 public class NonUser {
 
+    @NotBlank
     private String name;
+    @NotBlank
     private String phone;
 
     @Builder
