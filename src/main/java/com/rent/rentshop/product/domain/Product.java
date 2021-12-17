@@ -3,7 +3,10 @@ package com.rent.rentshop.product.domain;
 import com.rent.rentshop.common.BaseTime;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.rent.domain.Rent;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,7 +25,9 @@ public class Product extends BaseTime {
     @Column(name = "product_id")
     private Long id;
 
+    @Column(length = 100)
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private int price;
     private int deposit;
