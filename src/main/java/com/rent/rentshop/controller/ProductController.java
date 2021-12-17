@@ -163,7 +163,7 @@ public class ProductController {
 
         List<ProductImageResponse> imageResult = productImages.stream().map(i -> new ProductImageResponse(
                 i.getOriginalFileName(),
-                i.getServerFileName()
+                serverAddress+i.getServerFileName()
         )).collect(Collectors.toList());
 
         return imageResult;
