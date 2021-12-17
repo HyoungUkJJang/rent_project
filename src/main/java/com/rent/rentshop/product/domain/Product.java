@@ -22,8 +22,11 @@ public class Product extends BaseTime {
     @Column(name = "product_id")
     private Long id;
 
+    @Column(name="product_name")
     private String name;
+    @Column(name="product_description")
     private String description;
+    @Column(name="product_price")
     private int price;
     private int deposit;
 
