@@ -38,7 +38,13 @@ public class ProductController {
     public Slice<ProductSimpleResponse> getProducts(Pageable pageable) {
 
         Slice<ProductSimpleResponse> result = productService.getProducts(pageable)
-                .map(ProductSimpleResponse::new);
+                .map(p -> new ProductSimpleResponse(
+                        p.getId(),
+                        p.getName(),
+                        p.getPrice(),
+                        p.getDeposit(),
+                        serverAddress + p.getProductImages().get(0).getServerFileName()
+                ));
 
         return result;
 
