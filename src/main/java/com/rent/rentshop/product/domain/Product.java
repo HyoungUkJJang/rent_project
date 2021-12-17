@@ -38,8 +38,7 @@ public class Product extends BaseTime {
     List<Rent> rents = new ArrayList<>();
 
     @Builder
-    public Product(Long id, String name, String description, int price, int deposit) {
-        this.id = id;
+    public Product(String name, String description, int price, int deposit) {
         this.name = name;
         this.description = description;
         this.price = price;
