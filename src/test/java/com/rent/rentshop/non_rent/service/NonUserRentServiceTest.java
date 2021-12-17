@@ -100,7 +100,6 @@ class NonUserRentServiceTest {
      */
     private Product createProduct() {
         return Product.builder()
-                .id(1L)
                 .name("productName1")
                 .price(1000)
                 .deposit(15000)
