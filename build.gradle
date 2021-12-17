@@ -80,6 +80,13 @@ dependencies {
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.4.1'
 
 	/**
+	 * **************
+	 * ***MySQL DB***
+	 * **************
+	 */
+	implementation 'mysql:mysql-connector-java'
+
+	/**
 	 * *************
 	 * ***Swagger***
 	 * *************
