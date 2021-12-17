@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("rent/nonuser/borrow")
+@RequestMapping("/rent/nonuser/borrow")
 @RequiredArgsConstructor
 @CrossOrigin
 public class NonUserRentController {
