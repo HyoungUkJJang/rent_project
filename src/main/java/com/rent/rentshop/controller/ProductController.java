@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class ProductController {
 
-    private String serverAddress = "34.133.252.24:8080/static/img/products/";
+    private String serverAddress = "3.35.70.80:8080/static/img/products/";
     private final ProductService productService;
     private final ProductImageService productImageService;
 
@@ -59,7 +59,7 @@ public class ProductController {
                         r.getName(),
                         r.getPrice(),
                         r.getDeposit(),
-                        r.getProductImages().get(0).getServerFileName()
+                        serverAddress+r.getProductImages().get(0).getServerFileName()
                 ))
                 .collect(Collectors.toList());
 
