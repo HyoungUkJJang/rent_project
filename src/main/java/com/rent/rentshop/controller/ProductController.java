@@ -37,16 +37,16 @@ public class ProductController {
     @GetMapping
     public Slice<ProductSimpleResponse> getProducts(Pageable pageable) {
 
-        Slice<ProductSimpleResponse> result = productService.getProducts(pageable)
-                .map(p -> new ProductSimpleResponse(
-                        p.getId(),
-                        p.getName(),
-                        p.getPrice(),
-                        p.getDeposit(),
-                        serverAddress + p.getProductImages().get(0).getServerFileName()
-                ));
+//        Slice<ProductSimpleResponse> result = productService.getProducts(pageable)
+//                .map(p -> new ProductSimpleResponse(
+//                        p.getId(),
+//                        p.getName(),
+//                        p.getPrice(),
+//                        p.getDeposit(),
+//                        serverAddress + p.getProductImages().get(0).getServerFileName()
+//                ));
 
-        return result;
+        return productService.getProducts(pageable);
 
     }
 
@@ -79,7 +79,7 @@ public class ProductController {
      * @return 상품 상세조회 응답 도메인
      */
     @GetMapping("/{id}")
-    public ResponseData getProduct(@PathVariable("id") Long id) {
+    public ProductResponse getProduct(@PathVariable("id") Long id) {
 
         Product findProduct = productService.getProduct(id);
 
@@ -94,7 +94,7 @@ public class ProductController {
                 )
                 .build();
 
-        return new ResponseData(productResponseDto);
+        return productResponseDto;
 
     }
 
@@ -160,7 +160,6 @@ public class ProductController {
      * @return 조회용 이미지 리스트
      */
     private List<ProductImageResponse> imageResponsesConverter(List<ProductImage> productImages) {
-
         List<ProductImageResponse> imageResult = productImages.stream().map(i -> new ProductImageResponse(
                 i.getOriginalFileName(),
                 serverAddress+i.getServerFileName()
