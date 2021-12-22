@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class ProductController {
 
-    private String serverAddress = "http://3.35.70.80:8080/static/img/products/";
+    private String serverAddress = "https://rentproject.xyz/static/img/products/";
     private final ProductService productService;
     private final ProductImageService productImageService;
 
