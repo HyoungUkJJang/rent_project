@@ -5,6 +5,7 @@ import com.rent.rentshop.error.UserNotFoundException;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.member.repository.UserRepository;
 import com.rent.rentshop.product.domain.Product;
+import com.rent.rentshop.product.dto.ProductSimpleResponse;
 import com.rent.rentshop.product.dto.ProductUpdate;
 import com.rent.rentshop.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +21,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService{
 
+    private String serverAddress = "http://3.35.70.80:8080/static/img/products/";
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
     @Override
-    public Slice<Product> getProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Slice<ProductSimpleResponse> getProducts(Pageable pageable) {
+
+        return productRepository.findAll(pageable)
+                .map(p -> new ProductSimpleResponse(
+                p.getId(),
+                p.getName(),
+                p.getPrice(),
+                p.getDeposit(),
+                serverAddress + p.getProductImages().get(0).getServerFileName()
+        ));
+
     }
 
     @Override
