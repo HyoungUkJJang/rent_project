@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService{
 
-    private String serverAddress = "http://3.35.70.80:8080/static/img/products/";
+    private String serverAddress = "https://rentproject.xyz/static/img/products/";
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
