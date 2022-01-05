@@ -1,4 +1,4 @@
-# 렌트마켓
+# 빌리어 - BILLIAR
 
 ### 프로젝트 소개
 https://www.notion.so/4cb43b6d606b4261aaf0d96c2ac66aaa
