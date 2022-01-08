@@ -32,4 +32,18 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     }
 
+    @Override
+    public List<Product> getBest10Products(String city) {
+
+        List<Product> result = queryFactory
+                .select(product)
+                .from(product)
+                .where(product.city.eq(city))
+                .orderBy(product.hit.desc())
+                .limit(10)
+                .fetch();
+        return result;
+
+    }
+
 }

@@ -66,7 +66,6 @@ class ProductControllerTest {
                     ProductSimpleResponse productSimpleResponse = ProductSimpleResponse.builder()
                             .name("productName" + i)
                             .price(500 * i)
-                            .deposit(1000 * i)
                             .thumbnailImage("image" + i)
                             .build();
                     products.add(productSimpleResponse);

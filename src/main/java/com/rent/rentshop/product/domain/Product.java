@@ -31,6 +31,8 @@ public class Product extends BaseTime {
     private String description;
     private int price;
     private int deposit;
+    private String city;
+    private Long hit;
 
     @OneToMany(mappedBy = "product")
     List<ProductImage> productImages = new ArrayList<>();
@@ -43,13 +45,22 @@ public class Product extends BaseTime {
     List<Rent> rents = new ArrayList<>();
 
     @Builder
-    public Product(String name, String description, int price, int deposit) {
+    public Product(String name, String description, int price, int deposit, String city, Long hit) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.deposit = deposit;
+        this.city = city;
+        this.hit = hit;
     }
 
+    /**
+     * 상품 정보를 수정합니다.
+     * @param name 상품의 수정될 이름
+     * @param description 상품의 수정될 설명
+     * @param price 상품의 수정될 가격
+     * @param deposit 상품의 수정될 보증금
+     */
     public void updateProduct(String name, String description, int price, int deposit) {
         this.name = name;
         this.description = description;

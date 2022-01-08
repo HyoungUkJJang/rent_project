@@ -1,6 +1,7 @@
 package com.rent.rentshop.product.service;
 
 import com.rent.rentshop.product.domain.Product;
+import com.rent.rentshop.product.dto.ProductBest10Response;
 import com.rent.rentshop.product.dto.ProductSimpleResponse;
 import com.rent.rentshop.product.dto.ProductUpdate;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,19 @@ public interface ProductService {
      * @return 상품 리스트
      */
     Slice<ProductSimpleResponse> getProducts(Pageable pageable);
+
+    /**
+     * 주변 지역의 상품 전체를 조회해 상품목록을 슬라이스 형태로 리턴합니다.
+     * @return 상품 리스트
+     */
+    Slice<ProductSimpleResponse> getAreaProducts(Pageable pageable, String city);
+
+    /**
+     * 주변 지역의 상품들 중 인기있는 10개의 상품을 리스트 형태로 리턴합니다.
+     * @param city 주변지역
+     * @return 상품 리스
+     */
+    List<ProductBest10Response> getBest10Products(String city);
 
     /**
      * 사용자가 등록한 상품만 조회해 상품목록을 리턴합니다.

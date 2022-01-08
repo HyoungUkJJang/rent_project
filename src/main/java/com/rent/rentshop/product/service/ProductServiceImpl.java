@@ -5,6 +5,7 @@ import com.rent.rentshop.error.UserNotFoundException;
 import com.rent.rentshop.member.domain.User;
 import com.rent.rentshop.member.repository.UserRepository;
 import com.rent.rentshop.product.domain.Product;
+import com.rent.rentshop.product.dto.ProductBest10Response;
 import com.rent.rentshop.product.dto.ProductSimpleResponse;
 import com.rent.rentshop.product.dto.ProductUpdate;
 import com.rent.rentshop.product.repository.ProductRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -30,12 +32,38 @@ public class ProductServiceImpl implements ProductService{
 
         return productRepository.findAll(pageable)
                 .map(p -> new ProductSimpleResponse(
-                p.getId(),
-                p.getName(),
-                p.getPrice(),
-                p.getDeposit(),
-                serverAddress + p.getProductImages().get(0).getServerFileName()
-        ));
+                        p.getId(),
+                        p.getName(),
+                        p.getPrice(),
+                        serverAddress + p.getProductImages().get(0).getServerFileName(),
+                        p.getCity()
+                ));
+
+    }
+
+    @Override
+    public Slice<ProductSimpleResponse> getAreaProducts(Pageable pageable,String city) {
+
+        return productRepository.findByCity(pageable, city)
+                .map(p -> new ProductSimpleResponse(
+                        p.getId(),
+                        p.getName(),
+                        p.getPrice(),
+                        serverAddress + p.getProductImages().get(0).getServerFileName(),
+                        p.getCity()
+                ));
+
+    }
+
+    @Override
+    public List<ProductBest10Response> getBest10Products(String city) {
+
+        return productRepository.getBest10Products(city)
+                .stream().map(p -> new ProductBest10Response(
+                        p.getId(),
+                        p.getProductImages().get(0).getServerFileName(),
+                        p.getName()
+                )).collect(Collectors.toList());
 
     }
 

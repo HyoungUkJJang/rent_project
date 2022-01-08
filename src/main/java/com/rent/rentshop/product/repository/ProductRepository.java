@@ -2,6 +2,8 @@ package com.rent.rentshop.product.repository;
 
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.dto.ProductRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
      * @return 등록된 상품
      */
     Product save(ProductRequest form);
+
+    Slice<Product> findByCity(Pageable pageable, String city);
 
 }

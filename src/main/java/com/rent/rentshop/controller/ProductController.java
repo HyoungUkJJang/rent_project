@@ -37,17 +37,17 @@ public class ProductController {
     @GetMapping
     public Slice<ProductSimpleResponse> getProducts(Pageable pageable) {
 
-//        Slice<ProductSimpleResponse> result = productService.getProducts(pageable)
-//                .map(p -> new ProductSimpleResponse(
-//                        p.getId(),
-//                        p.getName(),
-//                        p.getPrice(),
-//                        p.getDeposit(),
-//                        serverAddress + p.getProductImages().get(0).getServerFileName()
-//                ));
+        return productService.getAreaProducts(pageable,"서울시 관악구");
 
-        return productService.getProducts(pageable);
+    }
 
+    /**
+     * 동네 주위의 베스트10 상품을 조회하여 반환 후 200 상태코드를 반환합니다.
+     * @return 베스트10 상품리스트 응답 도메인
+     */
+    @GetMapping("/best10")
+    public List<ProductBest10Response> getBest10Products() {
+        return productService.getBest10Products("서울시 관악구");
     }
 
     /**
@@ -64,8 +64,8 @@ public class ProductController {
                         r.getId(),
                         r.getName(),
                         r.getPrice(),
-                        r.getDeposit(),
-                        serverAddress+r.getProductImages().get(0).getServerFileName()
+                        serverAddress + r.getProductImages().get(0).getServerFileName(),
+                        r.getCity()
                 ))
                 .collect(Collectors.toList());
 
@@ -112,9 +112,13 @@ public class ProductController {
                 .description(form.getDescription())
                 .price(form.getPrice())
                 .deposit(form.getDeposit())
+                .city("서울시 관악구")
+                .hit(0L)
                 .build();
+
         Product result = productService.register(product,userEmail);
 
+        // 이미지 저장 작업
         List<ProductImage> images = productImageService.save(form.getImages(), result);
         List<ProductImageResponse> imageResult = imageResponsesConverter(images);
 

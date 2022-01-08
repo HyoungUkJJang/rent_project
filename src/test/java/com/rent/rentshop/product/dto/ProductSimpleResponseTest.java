@@ -16,7 +16,6 @@ class ProductSimpleResponseTest {
                 .id(1L)
                 .name("macBook")
                 .price(3000)
-                .deposit(50000)
                 .thumbnailImage("/home/ec-user/serverFileName.jpg")
                 .build();
 
