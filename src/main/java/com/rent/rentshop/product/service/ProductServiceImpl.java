@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.getBest10Products(city)
                 .stream().map(p -> new ProductBest10Response(
                         p.getId(),
-                        p.getProductImages().get(0).getServerFileName(),
+                        serverAddress + p.getProductImages().get(0).getServerFileName(),
                         p.getName()
                 )).collect(Collectors.toList());
 
