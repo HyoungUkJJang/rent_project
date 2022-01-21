@@ -26,14 +26,16 @@ public class ProductRequest {
 
     private String description;
     private List<MultipartFile> images;
+    private String tag;
 
     @Builder
-    public ProductRequest(String name, int price, int deposit, String description, List<MultipartFile> images) {
+    public ProductRequest(String name, int price, int deposit, String description, List<MultipartFile> images, String tag) {
         this.name = name;
         this.price = price;
         this.deposit = deposit;
         this.description = description;
         this.images = images;
+        this.tag = tag;
     }
 
 }

@@ -44,6 +44,9 @@ public class Product extends BaseTime {
     @OneToMany(mappedBy = "product")
     List<Rent> rents = new ArrayList<>();
 
+    @OneToOne(mappedBy = "product")
+    private HashTag hashTag;
+
     @Builder
     public Product(String name, String description, int price, int deposit, String city, Long hit) {
         this.name = name;

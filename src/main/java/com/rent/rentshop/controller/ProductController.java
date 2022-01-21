@@ -1,9 +1,11 @@
 package com.rent.rentshop.controller;
 
 import com.rent.rentshop.common.ResponseData;
+import com.rent.rentshop.product.domain.HashTag;
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.domain.ProductImage;
 import com.rent.rentshop.product.dto.*;
+import com.rent.rentshop.product.service.HashTagService;
 import com.rent.rentshop.product.service.ProductImageService;
 import com.rent.rentshop.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,7 @@ public class ProductController {
     private String serverAddress = "https://rentproject.xyz/static/img/products/";
     private final ProductService productService;
     private final ProductImageService productImageService;
+    private final HashTagService hashTagService;
 
     /**
      * 상품 전체를 슬라이스 형태로 조회하여 변환된 상품목록을 반환 후 200 상태코드를 반환합니다.
@@ -83,12 +87,21 @@ public class ProductController {
 
         Product findProduct = productService.getProduct(id);
 
+        String tag = findProduct.getHashTag().getTag();
+        List<String> tags = Arrays.stream(tag.split("#", -1)).filter(s -> s.length() >= 2)
+                .map(s -> "#" + s).
+                collect(Collectors.toList());
+        for (String s : tags) {
+            System.out.println(s);
+        }
+
         ProductResponse productResponseDto = ProductResponse.builder()
                 .id(findProduct.getId())
                 .name(findProduct.getName())
                 .price(findProduct.getPrice())
                 .deposit(findProduct.getDeposit())
                 .description(findProduct.getDescription())
+                .tags(tags)
                 .images(
                         imageResponsesConverter(findProduct.getProductImages())
                 )
@@ -115,8 +128,13 @@ public class ProductController {
                 .city("서울시 관악구")
                 .hit(0L)
                 .build();
-
         Product result = productService.register(product,userEmail);
+
+        // 해시태그 저장 작업
+        if (!form.getTag().equals("") || form.getTag() != null) {
+            HashTag hashTag = new HashTag(form.getTag(), result);
+            hashTagService.save(hashTag);
+        }
 
         // 이미지 저장 작업
         List<ProductImage> images = productImageService.save(form.getImages(), result);

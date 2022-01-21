@@ -20,15 +20,17 @@ public class ProductResponse {
     private int price;
     private int deposit;
     private String description;
+    private List<String> tags;
     private List<ProductImageResponse> images;
 
     @Builder
-    public ProductResponse(Long id, String name, int price, int deposit, String description, List<ProductImageResponse> images) {
+    public ProductResponse(Long id, String name, int price, int deposit, String description, List<String> tags, List<ProductImageResponse> images) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.deposit = deposit;
         this.description = description;
+        this.tags = tags;
         this.images = images;
     }
 
