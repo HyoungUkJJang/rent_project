@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/rent/nonuser/borrow")
+@RequestMapping("rent/products/{productId}/borrow_nonuser")
 @RequiredArgsConstructor
 @CrossOrigin
 public class NonUserRentController {
@@ -20,8 +20,8 @@ public class NonUserRentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public NonUserRentResponse createRent(@RequestBody @Valid NonUserRentRequest nonUserRentRequest, @RequestParam Long id) {
-        NonUserRent rent = nonUserRentService.createRent(nonUserRentRequest, id);
+    public NonUserRentResponse createRent(@RequestBody @Valid NonUserRentRequest nonUserRentRequest, @PathVariable Long productId) {
+        NonUserRent rent = nonUserRentService.createRent(nonUserRentRequest, productId);
         NonUserRentResponse result = NonUserRentResponse.builder()
                 .rentalDate(rent.getRentalDate())
                 .returnDate(rent.getReturnDate())

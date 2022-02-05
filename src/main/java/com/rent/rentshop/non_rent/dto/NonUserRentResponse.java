@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -12,11 +13,11 @@ public class NonUserRentResponse {
 
     private String name;
     private String phone;
-    private LocalDate rentalDate;
-    private LocalDate returnDate;
+    private LocalDateTime rentalDate;
+    private LocalDateTime returnDate;
 
     @Builder
-    public NonUserRentResponse(String name, String phone, LocalDate rentalDate, LocalDate returnDate) {
+    public NonUserRentResponse(String name, String phone, LocalDateTime rentalDate, LocalDateTime returnDate) {
         this.name = name;
         this.phone = phone;
         this.rentalDate = rentalDate;

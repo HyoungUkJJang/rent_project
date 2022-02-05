@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -18,8 +19,9 @@ public class NonUserRent {
     @Id
     @GeneratedValue
     private Long id;
-    private LocalDate rentalDate;
-    private LocalDate returnDate;
+    private LocalDateTime rentalDate;
+    private LocalDateTime returnDate;
+
     @Embedded
     private NonUser nonUser;
 
@@ -28,7 +30,7 @@ public class NonUserRent {
     private Product product;
 
     @Builder
-    public NonUserRent(LocalDate rentalDate, LocalDate returnDate, NonUser nonUser, Product product) {
+    public NonUserRent(LocalDateTime rentalDate, LocalDateTime returnDate, NonUser nonUser, Product product) {
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
         this.nonUser = nonUser;

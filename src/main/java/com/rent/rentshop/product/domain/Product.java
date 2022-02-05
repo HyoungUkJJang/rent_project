@@ -2,7 +2,6 @@ package com.rent.rentshop.product.domain;
 
 import com.rent.rentshop.common.BaseTime;
 import com.rent.rentshop.member.domain.User;
-import com.rent.rentshop.rent.domain.Rent;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,9 +39,6 @@ public class Product extends BaseTime {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-    @OneToMany(mappedBy = "product")
-    List<Rent> rents = new ArrayList<>();
 
     @OneToOne(mappedBy = "product")
     private HashTag hashTag;

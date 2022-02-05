@@ -7,7 +7,6 @@ import com.rent.rentshop.non_rent.dto.NonUserRentRequest;
 import com.rent.rentshop.non_rent.repository.NonUserRentRepository;
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.repository.ProductRepository;
-import com.rent.rentshop.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class NonUserRentServiceImpl implements NonUserRentService {
 
     private final NonUserRentRepository nonUserRentRepository;
-    //    private final ProductService productService;
     private final ProductRepository productRepository;
 
     @Override
     @Transactional
     public NonUserRent createRent(NonUserRentRequest nonUserRentRequest, Long productId) {
 
-        //Product findProduct = productService.getProduct(productId);
         Product findProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException());
 

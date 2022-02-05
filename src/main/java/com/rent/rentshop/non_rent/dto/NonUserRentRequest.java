@@ -13,11 +13,11 @@ public class NonUserRentRequest {
 
     private String name;
     private String phone;
-    private LocalDate rentalDate;
-    private LocalDate returnDate;
+    private LocalDateTime rentalDate;
+    private LocalDateTime returnDate;
 
     @Builder
-    public NonUserRentRequest(String name, String phone, LocalDate rentalDate, LocalDate returnDate) {
+    public NonUserRentRequest(String name, String phone, LocalDateTime rentalDate, LocalDateTime returnDate) {
         this.name = name;
         this.phone = phone;
         this.rentalDate = rentalDate;
