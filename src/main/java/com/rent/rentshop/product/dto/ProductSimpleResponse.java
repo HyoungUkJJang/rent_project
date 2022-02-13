@@ -17,6 +17,7 @@ public class ProductSimpleResponse {
     private String name;
     private int price;
     private String thumbnailImage;
+    private String category;
     private String city;
 
     @Builder

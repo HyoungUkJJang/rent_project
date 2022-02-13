@@ -1,5 +1,6 @@
 package com.rent.rentshop.product.domain;
 
+import com.rent.rentshop.category.domain.Category;
 import com.rent.rentshop.common.BaseTime;
 import com.rent.rentshop.member.domain.User;
 import lombok.Builder;
@@ -32,6 +33,10 @@ public class Product extends BaseTime {
     private int deposit;
     private String city;
     private Long hit;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @OneToMany(mappedBy = "product")
     List<ProductImage> productImages = new ArrayList<>();
