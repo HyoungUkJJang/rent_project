@@ -34,6 +34,9 @@ public class User extends BaseTime {
     @Embedded
     private Address userAddress;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    private UserImage userImage;
+
     @Builder
     public User(String email, String password, String name, String phone, String birth, String bankName, String account, Address userAddress) {
         this.email = email;

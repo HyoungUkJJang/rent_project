@@ -1,6 +1,7 @@
 package com.rent.rentshop.controller;
 
 import com.rent.rentshop.common.ResponseData;
+import com.rent.rentshop.member.dto.UserResponse;
 import com.rent.rentshop.product.domain.HashTag;
 import com.rent.rentshop.product.domain.Product;
 import com.rent.rentshop.product.domain.ProductImage;
@@ -104,6 +105,12 @@ public class ProductController {
                 .tags(tags)
                 .images(
                         imageResponsesConverter(findProduct.getProductImages())
+                )
+                .user(
+                        UserResponse.UserSimpleResponse.builder()
+                                .email(findProduct.getUser().getEmail())
+                                .image("")
+                                .build()
                 )
                 .build();
 

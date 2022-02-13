@@ -1,5 +1,6 @@
 package com.rent.rentshop.product.dto;
 
+import com.rent.rentshop.member.dto.UserResponse;
 import com.rent.rentshop.product.domain.ProductImage;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,9 +23,11 @@ public class ProductResponse {
     private String description;
     private List<String> tags;
     private List<ProductImageResponse> images;
+    private UserResponse.UserSimpleResponse user;
 
     @Builder
-    public ProductResponse(Long id, String name, int price, int deposit, String description, List<String> tags, List<ProductImageResponse> images) {
+    public ProductResponse(Long id, String name, int price, int deposit, String description,
+                           List<String> tags, List<ProductImageResponse> images, UserResponse.UserSimpleResponse user) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -32,6 +35,7 @@ public class ProductResponse {
         this.description = description;
         this.tags = tags;
         this.images = images;
+        this.user = user;
     }
 
 }

@@ -34,7 +34,8 @@ public class UserRequest {
     private String birth;
 
     @Builder
-    public UserRequest(String email, String password, String name, String phone, String bankName, String account, String roadAddress, String detailAddress, String birth) {
+    public UserRequest(String email, String password, String name, String phone, String bankName,
+                       String account, String roadAddress, String detailAddress, String birth) {
         this.email = email;
         this.password = password;
         this.name = name;

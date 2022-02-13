@@ -65,13 +65,14 @@ public class UserResponse {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class UserSimpleResponse {
         private String email;
-        private String name;
+        private String image;
 
         @Builder
-        public UserSimpleResponse(String email, String name) {
+        public UserSimpleResponse(String email, String image) {
             this.email = email;
-            this.name = name;
+            this.image = image;
         }
+
     }
 
 }

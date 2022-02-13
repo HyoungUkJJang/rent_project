@@ -2,6 +2,7 @@ package com.rent.rentshop.controller;
 
 import com.rent.rentshop.member.domain.Address;
 import com.rent.rentshop.member.domain.User;
+import com.rent.rentshop.member.domain.UserImage;
 import com.rent.rentshop.member.dto.UserRequest;
 import com.rent.rentshop.member.dto.UserResponse;
 import com.rent.rentshop.member.dto.UserUpdate;

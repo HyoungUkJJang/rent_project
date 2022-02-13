@@ -20,6 +20,8 @@ spring:
 file:
   dir:
     product: /Users/uh/Documents/work/project/my_lab/file/products/
+  dir2:
+    user: /Users/uh/Documents/work/project/my_lab/file/users/
 
 jwt:
   secret: "1234567890123456789012345678901234567890"

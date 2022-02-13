@@ -14,10 +14,19 @@ public class ResourceConfig implements WebMvcConfigurer {
     @Value(value = "${file.dir.product}")
     private String fileDir;
 
+    @Value(value = "${file.dir2.user}")
+    private String fileDir2;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/img/products/**")
                 .addResourceLocations("file:///" + fileDir)
+                .setCachePeriod(3600)
+                .resourceChain(true)
+                .addResolver(new PathResourceResolver());
+
+        registry.addResourceHandler("/static/img/users/**")
+                .addResourceLocations("file:///" + fileDir2)
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
