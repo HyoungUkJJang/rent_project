@@ -21,11 +21,12 @@ public class ProductSimpleResponse {
     private String city;
 
     @Builder
-    public ProductSimpleResponse(Long id, String name, int price, String thumbnailImage, String city) {
+    public ProductSimpleResponse(Long id, String name, int price, String thumbnailImage, String category, String city) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.thumbnailImage = thumbnailImage;
+        this.category = category;
         this.city = city;
     }
 
@@ -35,6 +36,7 @@ public class ProductSimpleResponse {
         this.price = product.getPrice();
         this.thumbnailImage = product.getProductImages().get(0).getServerFileName();
         this.city = product.getCity();
+        this.category = product.getCategory().getValue();
     }
 
 }

@@ -36,6 +36,7 @@ public class ProductServiceImpl implements ProductService{
                         p.getName(),
                         p.getPrice(),
                         serverAddress + p.getProductImages().get(0).getServerFileName(),
+                        p.getCategory().getValue(),
                         p.getCity()
                 ));
 
@@ -50,6 +51,7 @@ public class ProductServiceImpl implements ProductService{
                         p.getName(),
                         p.getPrice(),
                         serverAddress + p.getProductImages().get(0).getServerFileName(),
+                        p.getCategory().getValue(),
                         p.getCity()
                 ));
 

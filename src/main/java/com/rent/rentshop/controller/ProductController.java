@@ -70,6 +70,7 @@ public class ProductController {
                         r.getName(),
                         r.getPrice(),
                         serverAddress + r.getProductImages().get(0).getServerFileName(),
+                        r.getCategory().getValue(),
                         r.getCity()
                 ))
                 .collect(Collectors.toList());
